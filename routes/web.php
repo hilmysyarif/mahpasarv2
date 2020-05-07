@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontendController@index')->name('welcome');
+Route::get('/index', 'FrontendController@index')->name('index');
+Route::get('/product_list/{id}', 'FrontendController@product_list')->name('product_list');
+Route::get('/cart/{id}', 'FrontendController@cart')->name('cart');
 
-Auth::routes();
+Auth::routes([
+  'register' => false, // Registration Routes...
+  'reset' => false, // Password Reset Routes...
+  'verify' => false, // Email Verification Routes...
+]);
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

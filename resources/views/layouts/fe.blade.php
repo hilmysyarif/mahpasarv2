@@ -53,8 +53,9 @@
 
     </head>
     <body>
-
+        @include('templates.fe.header')
         @yield('content')
+        @include('templates.fe.footer')
 
         <!-- Vendor -->
         <script src="{{ asset('tmp/fe/vendor/jquery/jquery.min.js') }}"></script>
