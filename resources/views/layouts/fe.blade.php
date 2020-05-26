@@ -23,33 +23,33 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
 
         <!-- Vendor CSS -->
-        <link rel="stylesheet" href="{{ asset('tmp/fe/vendor/bootstrap/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/vendor/fontawesome-free/css/all.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/vendor/animate/animate.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/vendor/simple-line-icons/css/simple-line-icons.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/vendor/owl.carousel/assets/owl.carousel.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/vendor/owl.carousel/assets/owl.theme.default.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/vendor/magnific-popup/magnific-popup.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/vendor/bootstrap-star-rating/css/star-rating.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/animate/animate.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/simple-line-icons/css/simple-line-icons.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/owl.carousel/assets/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/owl.carousel/assets/owl.theme.default.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/magnific-popup/magnific-popup.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap-star-rating/css/star-rating.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css') }}">
 
         <!-- Theme CSS -->
-        <link rel="stylesheet" href="{{ asset('tmp/fe/css/theme.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/css/theme-elements.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/css/theme-blog.css') }}">
-        <link rel="stylesheet" href="{{ asset('tmp/fe/css/theme-shop.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/theme-elements.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/theme-blog.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/theme-shop.css') }}">
         
         <!-- Demo CSS -->
 
 
         <!-- Skin CSS -->
-        <link rel="stylesheet" href="{{ asset('tmp/fe/css/skins/default.css') }}"> 
+        <link rel="stylesheet" href="{{ asset('css/skins/default.css') }}"> 
 
         <!-- Theme Custom CSS -->
-        <link rel="stylesheet" href="{{ asset('tmp/fe/css/custom.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
         <!-- Head Libs -->
-        <script src="{{ asset('tmp/fe/vendor/modernizr/modernizr.min.js') }}"></script>
+        <script src="{{ asset('vendor/modernizr/modernizr.min.js') }}"></script>
 
     </head>
     <body>
@@ -58,36 +58,36 @@
         @include('templates.fe.footer')
 
         <!-- Vendor -->
-        <script src="{{ asset('tmp/fe/vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/jquery.appear/jquery.appear.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/jquery.cookie/jquery.cookie.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/popper/umd/popper.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/common/common.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/jquery.validation/jquery.validate.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/jquery.gmap/jquery.gmap.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/jquery.lazyload/jquery.lazyload.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/isotope/jquery.isotope.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/vide/jquery.vide.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/vivus/vivus.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/bootstrap-star-rating/js/star-rating.min.js') }}"></script>
-        <script src="{{ asset('tmp/fe/vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery.appear/jquery.appear.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery.cookie/jquery.cookie.min.js') }}"></script>
+        <script src="{{ asset('vendor/popper/umd/popper.min.js') }}"></script>
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('vendor/common/common.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery.validation/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery.gmap/jquery.gmap.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery.lazyload/jquery.lazyload.min.js') }}"></script>
+        <script src="{{ asset('vendor/isotope/jquery.isotope.min.js') }}"></script>
+        <script src="{{ asset('vendor/owl.carousel/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+        <script src="{{ asset('vendor/vide/jquery.vide.min.js') }}"></script>
+        <script src="{{ asset('vendor/vivus/vivus.min.js') }}"></script>
+        <script src="{{ asset('vendor/bootstrap-star-rating/js/star-rating.min.js') }}"></script>
+        <script src="{{ asset('vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js') }}"></script>
         
         <!-- Theme Base, Components and Settings -->
-        <script src="{{ asset('tmp/fe/js/theme.js') }}"></script>
+        <script src="{{ asset('js/theme.js') }}"></script>
 
         <!-- Current Page Vendor and Views -->
-        <script src="{{ asset('tmp/fe/js/views/view.shop.js') }}"></script>
+        <script src="{{ asset('js/views/view.shop.js') }}"></script>
         
         <!-- Theme Custom -->
-        <script src="{{ asset('tmp/fe/js/custom.js') }}"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
         
         <!-- Theme Initialization Files -->
-        <script src="{{ asset('tmp/fe/js/theme.init.js') }}"></script>
+        <script src="{{ asset('js/theme.init.js') }}"></script>
 
         <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
         <script>

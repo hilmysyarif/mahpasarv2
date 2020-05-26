@@ -11,7 +11,7 @@ class FrontendController extends Controller
     public function index()
     {
     	$data['category'] = CategoryModel::all();
-    	$data['product'] = ProductModel::all();    	
+    	$data['product'] = ProductModel::all();    
         return view('welcome', $data);
     }
 

@@ -31,9 +31,15 @@
                                             <li class="nav-item nav-item-anim-icon d-none d-md-block">
                                                 <a class="nav-link" href="contact-us.html"><i class="fas fa-angle-right"></i> Contact Us</a>
                                             </li>
-                                            <li class="nav-item dropdown nav-item-left-border d-none d-sm-block">
-                                                <a href="{{ route('login') }}"><i class="far fa-user p-relative" style="top: 0;"></i> Login</a>
-                                            </li>                                            
+                                            <?php if (empty(auth()->user()->id)) { ?>
+                                                <li class="nav-item dropdown nav-item-left-border d-none d-sm-block">
+                                                    <a href="{{ route('login') }}"><i class="far fa-user p-relative" style="top: 0;"></i> Login</a>
+                                                </li>                                                                            
+                                            <?php }else{ ?>
+                                                <li class="nav-item dropdown nav-item-left-border d-none d-sm-block">
+                                                    <a href="{{ route('login') }}"><i class="far fa-user p-relative" style="top: 0;"></i> Logout</a>
+                                                </li>                                                                            
+                                            <?php } ?>                                            
                                         </ul>
                                     </nav>
                                 </div>
@@ -47,7 +53,7 @@
                             <div class="header-row">
                                 <div class="header-logo">
                                     <a href="{{ route('index') }}">
-                                        <img alt="Porto" width="100" height="48" data-sticky-width="82" data-sticky-height="40" data-sticky-top="84" src="{{ asset('tmp/fe/img/logo.png') }}">
+                                        <img alt="Porto" width="100" height="48" data-sticky-width="82" data-sticky-height="40" data-sticky-top="84" src="{{ asset('img/logo.png') }}">
                                     </a>
                                 </div>
                             </div>
@@ -71,34 +77,55 @@
                                 <div class="header-nav-features">
                                     <div class="header-nav-feature header-nav-features-cart header-nav-features-cart-big d-inline-flex ml-2" data-sticky-header-style="{'minResolution': 991}" data-sticky-header-style-active="{'top': '78px'}" data-sticky-header-style-deactive="{'top': '0'}">
                                         <a href="#" class="header-nav-features-toggle">
-                                            <img src="{{ asset('tmp/fe/img/icon-cart-big.svg') }}" height="34" alt="" class="header-nav-top-icon-img">
+                                            <img src="{{ asset('img/icon-cart-big.svg') }}" height="34" alt="" class="header-nav-top-icon-img">
                                             <span class="cart-info">
-                                                <span class="cart-qty">1</span>
+                                            <?php  
+                                                if (empty(auth()->user()->id)) {
+                                                    $cart = 0;
+                                                }else{
+                                                    $cart = App\Model\CartModel::select('cart.*', 'cart_detail.id_product')->join('cart_detail', 'cart.id', '=', 'cart_detail.id_cart')->where('user_id', '=', auth()->user()->id)->count();                  
+                                                    $cart_data = App\Model\CartModel::select('cart.*', 'cart_detail.id_product', 'cart_detail.qty as qty', 'product.sku as sku', 'product.name as product_name', 'product.image as image', 'product.price as product_price')->join('cart_detail', 'cart.id', '=', 'cart_detail.id_cart')->join('product', 'cart_detail.id_product', '=', 'product.id')->where('user_id', '=', auth()->user()->id)->get();
+                                                    $total = App\Model\CartModel::where('user_id', '=', auth()->user()->id)->first();
+                                                }
+                                            ?>                                                
+                                                <span class="cart-qty">{{ $cart }}</span>
                                             </span>
                                         </a>
                                         <div class="header-nav-features-dropdown" id="headerTopCartDropdown">
+                                            <?php if (empty(auth()->user()->id)) {
+                                                # code...
+                                            }else{ ?>
                                             <ol class="mini-products-list">
-                                                <li class="item">
-                                                    <a href="#" title="Camera X1000" class="product-image"><img src="img/products/product-1.jpg" alt="Camera X1000"></a>
-                                                    <div class="product-details">
-                                                        <p class="product-name">
-                                                            <a href="#">Camera X1000 </a>
-                                                        </p>
-                                                        <p class="qty-price">
-                                                             1X <span class="price">$890</span>
-                                                        </p>
-                                                        <a href="#" title="Remove This Item" class="btn-remove"><i class="fas fa-times"></i></a>
-                                                    </div>
-                                                </li>
+                                                <?php foreach ($cart_data as $key => $value) { ?>
+                                                    <li class="item">
+                                                        <a href="#" title="Camera X1000" class="product-image"><img src="{{ asset('img') }}/{{ $value->image }}" alt="Camera X1000"></a>
+                                                        <div class="product-details">
+                                                            <p class="product-name">
+                                                                <a href="#">{{ $value->product_name }} X {{ $value->qty }} </a>
+                                                            </p>
+                                                            <p class="qty-price">
+                                                                 1X <span class="price">{{ number_format($value->product_price, 2,',','.') }}</span>
+                                                            </p>
+                                                            <a href="#" title="Remove This Item" class="btn-remove"><i class="fas fa-times"></i></a>
+                                                        </div>
+                                                    </li>                                                    
+                                                <?php } ?>
                                             </ol>
-                                            <div class="totals">
-                                                <span class="label">Total:</span>
-                                                <span class="price-total"><span class="price">$890</span></span>
-                                            </div>
-                                            <div class="actions">
-                                                <a class="btn btn-dark" href="#">View Cart</a>
-                                                <a class="btn btn-primary" href="#">Checkout</a>
-                                            </div>
+                                            <?php } ?>                                            
+                                            <?php if (empty($total)) { ?>
+                                                <div class="totals">
+                                                    <span class="label" style="position: center">You are not shop yet</span>
+                                                </div>                                                
+                                            <?php } else{ ?>
+                                                <div class="totals">
+                                                    <span class="label">Total :</span>
+                                                    <span class="price-total"><span class="price">{{ isset($total->total_price) ? 'Rp '. number_format($total->total_price, 2,',','.')  : 0 }}</span></span>
+                                                </div>                                                
+                                                <div class="actions">
+                                                    <a class="btn btn-dark" href="{{ route('fe.cart.show') }}">View Cart</a>
+                                                    <a class="btn btn-primary" href="#">Checkout</a>
+                                                </div>                                                
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -121,35 +148,23 @@
                                                         </a>
                                                     </li>
                                                     <li class="dropdown dropdown-mega">
-                                                        <a class="dropdown-item dropdown-toggle" href="elements.html">
-                                                            Elements
+                                                        <a class="dropdown-item dropdown-toggle" href="">
+                                                            Products
                                                         </a>
                                                     </li>
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-item dropdown-toggle" href="#">
-                                                            Features
-                                                        </a>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-item dropdown-toggle" href="#">
-                                                            Pages
-                                                        </a>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-item dropdown-toggle" href="#">
-                                                            Portfolio
-                                                        </a>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-item dropdown-toggle" href="#">
-                                                            Blog
-                                                        </a>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a class="dropdown-item dropdown-toggle active" href="#">
-                                                            Shop
-                                                        </a>
-                                                    </li>
+                                                    <?php if (empty(auth()->user()->email)) { ?>
+                                                        <li class="dropdown">
+                                                            <a class="dropdown-item dropdown-toggle" href="{{ route('login') }}">
+                                                                My Orders
+                                                            </a>
+                                                        </li>
+                                                    <?php }else{ ?>
+                                                        <li class="dropdown">
+                                                            <a class="dropdown-item dropdown-toggle" href="{{ route('fe.history.index') }}">
+                                                                My Orders
+                                                            </a>
+                                                        </li>                                                        
+                                                    <?php } ?>
                                                 </ul>
                                             </nav>
                                         </div>

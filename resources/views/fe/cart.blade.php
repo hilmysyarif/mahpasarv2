@@ -22,34 +22,6 @@
                                 <li class="nav-item"><a class="nav-link" href="{{ route('product_list', $value->id) }}">{{ $value->category_name }}</a></li>    
                             <?php } ?>                                
                         </ul>
-                        <h5 class="font-weight-bold pt-5">Tags</h5>
-                        <div class="mb-3 pb-1">
-                            <a href="#"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">Nike</span></a>
-                            <a href="#"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">Travel</span></a>
-                            <a href="#"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">Sport</span></a>
-                        </div>
-                        <div class="row mb-5">
-                            <div class="col">
-                                <h5 class="font-weight-bold pt-5">Top Rated Products</h5>
-                                <ul class="simple-post-list">
-                                    <li>
-                                        <div class="post-image">
-                                            <div class="d-block">
-                                                <a href="shop-product-sidebar-left.html">
-                                                    <img alt="" width="60" height="60" class="img-fluid" src="img/products/product-grey-1.jpg">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="post-info">
-                                            <a href="shop-product-sidebar-left.html">Photo Camera</a>
-                                            <div class="post-meta text-dark font-weight-semibold">
-                                                $299
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </aside>
                 </div>
                 <div class="col-lg-9">
@@ -79,13 +51,15 @@
 
                                 <p class="mb-5">{{ $product->description }}. </p>
 
-                                <form enctype="multipart/form-data" method="post" class="cart">
-                                    <div class="quantity quantity-lg">
+                                <form enctype="multipart/form-data" method="post" class="cart" action="{{ route('fe.cart.store') }}">
+                                    @csrf
+                                    <input type="hidden" name="id_product" value="{{ $product->id }}">
+                                    <div class="quantity quantity-lg">                                        
                                         <input type="button" class="minus" value="-">
-                                        <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                        <input type="text" class="input-text qty text" title="Qty" value="1" name="qty" min="1" step="1">
                                         <input type="button" class="plus" value="+">
                                     </div>
-                                    <button href="#" class="btn btn-primary btn-modern text-uppercase">Add to cart</button>
+                                    <button type="submit" class="btn btn-primary btn-modern text-uppercase">Add to cart</button>
                                 </form>
 
                                 <div class="product-meta">
@@ -171,16 +145,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
-                                                        <div class="form-group col-lg-6">
-                                                            <label class="required font-weight-bold text-dark">Name</label>
-                                                            <input type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="name" id="name" required>
-                                                        </div>
-                                                        <div class="form-group col-lg-6">
-                                                            <label class="required font-weight-bold text-dark">Email Address</label>
-                                                            <input type="email" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="email" id="email" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-row">
                                                         <div class="form-group col">
                                                             <label class="required font-weight-bold text-dark">Review</label>
                                                             <textarea maxlength="5000" data-msg-required="Please enter your review." rows="8" class="form-control" name="review" id="review" required></textarea>
@@ -209,10 +173,10 @@
                             <?php foreach ($product_list as $key => $value) { ?>
                                 <div class="col-12 col-sm-6 col-lg-3 product">
                                     <span class="product-thumb-info border-0">
-                                        <a href="shop-cart.html" class="add-to-cart-product bg-color-primary">
+                                        <a href="" class="add-to-cart-product bg-color-primary">
                                             <span class="text-uppercase text-1">Add to Cart</span>
                                         </a>
-                                        <a href="shop-product-sidebar-left.html">
+                                        <a href="">
                                             <span class="product-thumb-info-image">
                                                 <img alt="" class="img-fluid" src="{{ asset('img') }}/{{ $value->image }}">
                                             </span>
