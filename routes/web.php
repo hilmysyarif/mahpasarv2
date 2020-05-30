@@ -36,7 +36,16 @@ Route::get('/shopping-help', 'FrontendController@shopping_help')->name('shopping
 Route::get('/testimoni', 'FrontendController@testimoni')->name('testimoni');
 Route::get('/pengiriman-barang', 'FrontendController@pengiriman_barang')->name('pengiriman-barang');
 
+Route::get('/clear', function() {
 
+   Artisan::call('cache:clear');
+   Artisan::call('config:clear');
+   Artisan::call('config:cache');
+   Artisan::call('view:clear');
+
+   return "Cleared!";
+
+});
 
 Route::get('/admin', 'HomeController@index')->middleware(CheckRole::class)->name('admin');
 
