@@ -199,4 +199,21 @@ class CartController extends Controller
 
         return redirect(route('fe.cart.show'));
     }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy_all()
+    {
+        $get_cart_table = CartModel::where('user_id', auth()->user()->id)->first();
+        $detail_cart    = CartDetailModel::where('id_cart', $get_cart_table->id)->delete();
+        $get_cart_table->delete();
+
+        return redirect(route('fe.cart.show'));
+    }
+
 }

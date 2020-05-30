@@ -38,6 +38,9 @@ Route::name('fe.')->group(function () {
 		Route::get('fe/cart/show', 'Fe\CartController@show')->name('show');
 		Route::get('fe/cart/destroy/{id}', 'Fe\CartController@destroy')->name('destroy');
 		Route::post('fe/cart/update', 'Fe\CartController@update')->name('update');
+		Route::get('cart/delete_cart', 'Fe\CartController@destroy_all')->name('destroy_all');
+
+
 	});
 
 	Route::name('order.')->group(function () {
