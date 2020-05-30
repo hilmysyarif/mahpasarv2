@@ -23,8 +23,8 @@ Auth::routes([
 Route::get('/', 'FrontendController@index')->name('welcome');
 Route::get('/index', 'FrontendController@index')->name('index');
 Route::get('/products', 'FrontendController@product_list')->name('product_list.v2');
-Route::get('/products/{id}', 'FrontendController@product_list')->name('product_list');
-Route::get('/cart/{id}', 'FrontendController@cart')->name('cart');
+Route::get('/c/{id}', 'FrontendController@product_list')->name('product_list');
+Route::get('/p/{id}', 'FrontendController@cart')->name('cart');
 
 Route::get('/home', 'FrontendController@index')->name('home');
 Route::get('/admin', 'HomeController@index')->middleware(CheckRole::class)->name('admin');
@@ -41,7 +41,7 @@ Route::name('fe.')->group(function () {
 	});
 
 	Route::name('order.')->group(function () {
-		Route::get('fe/order/store', 'Fe\OrderController@store')->name('store');
+		Route::get('payment', 'Fe\OrderController@store')->name('store');
 	});	
 
 	Route::name('history.')->group(function () {

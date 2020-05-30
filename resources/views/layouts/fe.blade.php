@@ -15,6 +15,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style-responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/products.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/product-responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/cart.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/detail.css') }}">
+
+
     <link
       rel="shortcut icon"
       href="{{ asset('images/logo/favicon.png') }}"

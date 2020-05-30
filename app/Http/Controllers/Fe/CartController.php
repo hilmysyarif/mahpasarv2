@@ -8,6 +8,10 @@ use App\Model\CartModel;
 use App\Model\CartDetailModel;
 use App\User;
 use App\Model\ProductModel;
+use App\Model\CategoryModel;
+use App\Model\Setting;
+use App\Model\Sosmed;
+use App\Model\Rekening;
 
 
 class CartController extends Controller
@@ -106,7 +110,7 @@ class CartController extends Controller
                 $cartdetail->created_at =  date("Y-m-d H:i:s");
                 $cartdetail->save();
             }
-            return redirect(route('fe.index'));
+            return redirect(route('home'));
 
         }
     }
@@ -119,6 +123,14 @@ class CartController extends Controller
      */
     public function show()
     {
+        $data['category'] = CategoryModel::all();       
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
+
         $data['cart'] = CartModel::select('cart.*', 'cart_detail.id_product', 'cart_detail.qty as qty', 'cart_detail.id as cart_detail_id', 'cart_detail.subtotal as subtotal', 'product.id as id_product', 'product.sku as sku', 'product.name as product_name', 'product.image as product_image', 'product.price as product_price')->join('cart_detail', 'cart.id', '=', 'cart_detail.id_cart')->join('product', 'cart_detail.id_product', '=', 'product.id')->where('user_id', '=', auth()->user()->id)->get();
         $data['total_price'] = CartModel::where('user_id', auth()->user()->id)->first();
         return view('fe.cart.show', $data);

@@ -100,6 +100,7 @@ class FrontendController extends Controller
         $data['setting'] = Setting::find(1);
         $data['sosmed'] = Sosmed::all();
         $data['product'] = ProductModel::find($id);
+        $data['category'] = CategoryModel::all();       
         $data['categoriesLimit'] = CategoryModel::limit(5)->get();
         $data['footerinfo'] = (new Setting)->getFooterInfo();
         $data['footerhelp'] = (new Setting)->getFooterHelp();
