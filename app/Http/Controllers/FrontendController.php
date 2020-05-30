@@ -10,6 +10,7 @@ use App\Model\Setting;
 use App\Model\Sosmed;
 use App\Model\Rekening;
 use App\Model\Page;
+use App\Model\Testimoni;
 
 
 class FrontendController extends Controller
@@ -189,6 +190,7 @@ class FrontendController extends Controller
         return view('fe.pages', $data);
         
     }
+
     public function pengiriman_barang()
     {
         $slug = 'pengiriman-barang';
@@ -202,6 +204,21 @@ class FrontendController extends Controller
         $data['rekening'] = Rekening::all();
         // return $data['content'];
         return view('fe.pages', $data);
+        
+    }
+
+    public function testimoni()
+    {
+        $data['testi']  = Testimoni::all();
+        $data['category'] = CategoryModel::all();
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
+        // return $data['content'];
+        return view('fe.testimoni', $data);
         
     }
 }

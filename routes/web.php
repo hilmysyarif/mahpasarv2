@@ -32,6 +32,7 @@ Route::get('/about', 'FrontendController@about')->name('about');
 Route::get('/privacy-policy', 'FrontendController@policy')->name('policy');
 Route::get('/terms', 'FrontendController@terms')->name('terms');
 Route::get('/shopping-help', 'FrontendController@shopping_help')->name('shopping-help');
+Route::get('/testimoni', 'FrontendController@testimoni')->name('testimoni');
 Route::get('/pengiriman-barang', 'FrontendController@pengiriman_barang')->name('pengiriman-barang');
 
 
