@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 30, 2020 at 08:20 AM
+-- Generation Time: May 30, 2020 at 12:17 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.3.18
 
@@ -169,7 +169,32 @@ CREATE TABLE `migrations` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1);
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2020_05_30_120759_create_permission_tables', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `model_has_permissions`
+--
+
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `model_has_roles`
+--
+
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -193,7 +218,16 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`id`, `user_id`, `total_price`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(3, 2, 1000000.00, 8, 'dodinovembri32@gmail.com', 'dodinovembri32@gmail.com', '2020-05-25 06:17:24', '2020-05-25 06:19:35');
+(3, 2, 1000000.00, 8, 'dodinovembri32@gmail.com', 'dodinovembri32@gmail.com', '2020-05-25 06:17:24', '2020-05-25 06:19:35'),
+(4, 1, 1093596.00, 1, 'hilmysyarif@gmail.com', NULL, '2020-05-30 02:05:08', '2020-05-30 02:05:08'),
+(5, 1, 12000000.00, 1, 'hilmysyarif@gmail.com', NULL, '2020-05-30 02:10:19', '2020-05-30 02:10:19'),
+(6, 1, 8000000.00, 1, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:33:54', '2020-05-30 03:33:54'),
+(7, 1, 6000000.00, 1, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:34:14', '2020-05-30 03:34:14'),
+(8, 1, 68000000.00, 1, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:38:11', '2020-05-30 03:38:11'),
+(9, 1, 8000000.00, 1, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:41:20', '2020-05-30 03:41:20'),
+(10, 1, 6000000.00, 1, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:51:39', '2020-05-30 03:51:39'),
+(11, 1, 6000000.00, 1, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:52:50', '2020-05-30 03:52:50'),
+(12, 1, 2000000.00, 1, 'hilmysyarif@gmail.com', NULL, '2020-05-30 04:33:55', '2020-05-30 04:33:55');
 
 -- --------------------------------------------------------
 
@@ -219,7 +253,16 @@ CREATE TABLE `order_detail` (
 --
 
 INSERT INTO `order_detail` (`id`, `id_order`, `id_product`, `qty`, `price`, `subtotal`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 3, 1, 1, 1000000.00, 1000000.00, 'dodinovembri32@gmail.com', NULL, '2020-05-25 06:17:25', '2020-05-25 06:17:25');
+(1, 3, 1, 1, 1000000.00, 1000000.00, 'dodinovembri32@gmail.com', NULL, '2020-05-25 06:17:25', '2020-05-25 06:17:25'),
+(2, 4, 31, 2, 546798.00, 1093596.00, 'hilmysyarif@gmail.com', NULL, '2020-05-30 02:05:08', '2020-05-30 02:05:08'),
+(3, 5, 1, 12, 1000000.00, 12000000.00, 'hilmysyarif@gmail.com', NULL, '2020-05-30 02:10:19', '2020-05-30 02:10:19'),
+(4, 7, 3, 3, 2000000.00, 6000000.00, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:34:14', '2020-05-30 03:34:14'),
+(5, 8, 3, 34, 2000000.00, 68000000.00, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:38:11', '2020-05-30 03:38:11'),
+(6, 9, 3, 1, 2000000.00, 2000000.00, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:41:20', '2020-05-30 03:41:20'),
+(7, 9, 3, 3, 2000000.00, 6000000.00, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:41:20', '2020-05-30 03:41:20'),
+(8, 10, 3, 3, 2000000.00, 6000000.00, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:51:39', '2020-05-30 03:51:39'),
+(9, 11, 3, 3, 2000000.00, 6000000.00, 'hilmysyarif@gmail.com', NULL, '2020-05-30 03:52:50', '2020-05-30 03:52:50'),
+(10, 12, 3, 1, 2000000.00, 2000000.00, 'hilmysyarif@gmail.com', NULL, '2020-05-30 04:33:55', '2020-05-30 04:33:55');
 
 -- --------------------------------------------------------
 
@@ -250,7 +293,16 @@ INSERT INTO `order_history` (`id`, `user_id`, `id_order`, `status`, `created_by`
 (5, 2, 3, 5, 'dodinovembri32@gmail.com', NULL, '2020-05-25 06:19:14', '2020-05-25 06:19:14'),
 (6, 2, 3, 6, 'dodinovembri32@gmail.com', NULL, '2020-05-25 06:19:20', '2020-05-25 06:19:20'),
 (7, 2, 3, 7, 'dodinovembri32@gmail.com', NULL, '2020-05-25 06:19:24', '2020-05-25 06:19:24'),
-(8, 2, 3, 8, 'dodinovembri32@gmail.com', NULL, '2020-05-25 06:19:36', '2020-05-25 06:19:36');
+(8, 2, 3, 8, 'dodinovembri32@gmail.com', NULL, '2020-05-25 06:19:36', '2020-05-25 06:19:36'),
+(9, 1, 4, 1, NULL, NULL, '2020-05-30 02:05:08', '2020-05-30 02:05:08'),
+(10, 1, 5, 1, NULL, NULL, '2020-05-30 02:10:19', '2020-05-30 02:10:19'),
+(11, 1, 6, 1, NULL, NULL, '2020-05-30 03:33:54', '2020-05-30 03:33:54'),
+(12, 1, 7, 1, NULL, NULL, '2020-05-30 03:34:14', '2020-05-30 03:34:14'),
+(13, 1, 8, 1, NULL, NULL, '2020-05-30 03:38:11', '2020-05-30 03:38:11'),
+(14, 1, 9, 1, NULL, NULL, '2020-05-30 03:41:20', '2020-05-30 03:41:20'),
+(15, 1, 10, 1, NULL, NULL, '2020-05-30 03:51:39', '2020-05-30 03:51:39'),
+(16, 1, 11, 1, NULL, NULL, '2020-05-30 03:52:50', '2020-05-30 03:52:50'),
+(17, 1, 12, 1, NULL, NULL, '2020-05-30 04:33:56', '2020-05-30 04:33:56');
 
 -- --------------------------------------------------------
 
@@ -323,6 +375,20 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product`
 --
 
@@ -340,29 +406,33 @@ CREATE TABLE `product` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `promo_price` bigint(20) DEFAULT NULL,
   `is_promo` tinyint(1) NOT NULL DEFAULT '0',
-  `publish` tinyint(1) NOT NULL DEFAULT '0'
+  `publish` tinyint(1) NOT NULL DEFAULT '0',
+  `stock` varchar(11) NOT NULL DEFAULT '0',
+  `weight` varchar(255) NOT NULL DEFAULT '0',
+  `transaction` varchar(255) NOT NULL DEFAULT '0',
+  `viewer` varchar(255) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `id_category`, `sku`, `name`, `price`, `description`, `image`, `created_by`, `updated_by`, `created_at`, `updated_at`, `promo_price`, `is_promo`, `publish`) VALUES
-(1, 1, 'P001', 'Prewedding Elegant', 1000000, '6 Pose + Edit (CD)\r\nCetak 10R 5+bingkai\r\nCetak 20R 1 Lembar (tanpa bingkai)\r\nKostum 1 pasang (set)\r\nMake up + Sanggul/Jilbab\r\nPas Foto', 'camera.jpg', NULL, NULL, NULL, NULL, 500000, 1, 1),
-(2, 1, 'P002', 'Prewedding Complit', 1250000, '6 Pose + Edit (CD)\r\nCetak 10R 5 + Bingkai\r\nCetak 20R 1 + Bingkai linen\r\nKostum 1 pasang (set)\r\nMake up + Sanggul/Jilbab\r\nPas Foto\r\nX- banner\r\nBanner 1x3 M', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(3, 1, 'P003', 'Prewedding Outdoor', 2000000, 'File (seluruh) (CD)\r\nCetak 10R 5+bingkai\r\nCetak 20R 2+Frame (minimalis)\r\nPas foto\r\nX-Banner 1 (set)\r\nKostum 1 pasang (set)\r\nBanner 4x1 M\r\nMake up + Sanggul/Jilbab\r\n*Biaya belum termasuk transport/makan', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(4, 2, 'P004', 'Foto Group (1-7 Orang)', 100000, '1-7 Orang\r\nCetak 10R (1 pcs)\r\nFile 2', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(5, 2, 'P005', 'Foto Group (9-12 Orang)', 110000, '9-12 Orang\r\nCetak 10R (1 pcs)\r\nFile 2', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(6, 2, 'P006', 'Foto Couple', 100000, '1 Pose\r\nCetak 10R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(7, 2, 'P007', 'Foto Gandeng', 60000, '3 Lembar 3x4\r\n3 Lembar 2x3\r\n3 Lembar 4x6 + CD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(8, 3, 'P008', 'Keluarga Elegant', 600000, '4 Pose\r\nCetak 10R + Frame\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(9, 3, 'P009', 'Keluarga Eksklusif', 1000000, '3 Pose\r\n80x100 Cetak Kanvas\r\n16 R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(10, 3, 'P0010', 'Keluarga Mewah', 600000, '3 Pose 20R\r\nCetak 12R (2 Pcs)\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(11, 4, 'P0011', 'Foto Model', 100000, '1 Pose\r\nCetak 10R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(12, 4, 'P0012', 'Pas Foto', 40000, '3 Lembar 3x4\r\n3 Lembar 2x3\r\n3 Lembar 4x6\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(13, 4, 'P0013', 'Foto Close Up', 80000, '1 Pose\r\n4R (2 lembar)\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(14, 5, 'V0014', 'VIDEO SHOOTING', 2300000, 'CD Album 15 Sheet Video', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(31, 1, '11', 'Dodi Novembri', 546798, 'sdfsdf', '5ec2af8fcb362.jpg', NULL, NULL, '2020-05-18 08:53:51', '2020-05-18 08:53:51', NULL, 0, 1);
+INSERT INTO `product` (`id`, `id_category`, `sku`, `name`, `price`, `description`, `image`, `created_by`, `updated_by`, `created_at`, `updated_at`, `promo_price`, `is_promo`, `publish`, `stock`, `weight`, `transaction`, `viewer`) VALUES
+(1, 1, 'P001', 'Prewedding Elegant', 1000000, '6 Pose + Edit (CD)\r\nCetak 10R 5+bingkai\r\nCetak 20R 1 Lembar (tanpa bingkai)\r\nKostum 1 pasang (set)\r\nMake up + Sanggul/Jilbab\r\nPas Foto', 'camera.jpg', NULL, NULL, NULL, NULL, 500000, 1, 1, '0', '0', '0', '0'),
+(2, 1, 'P002', 'Prewedding Complit', 1250000, '6 Pose + Edit (CD)\r\nCetak 10R 5 + Bingkai\r\nCetak 20R 1 + Bingkai linen\r\nKostum 1 pasang (set)\r\nMake up + Sanggul/Jilbab\r\nPas Foto\r\nX- banner\r\nBanner 1x3 M', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(3, 1, 'P003', 'Prewedding Outdoor', 2000000, 'File (seluruh) (CD)\r\nCetak 10R 5+bingkai\r\nCetak 20R 2+Frame (minimalis)\r\nPas foto\r\nX-Banner 1 (set)\r\nKostum 1 pasang (set)\r\nBanner 4x1 M\r\nMake up + Sanggul/Jilbab\r\n*Biaya belum termasuk transport/makan', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '99', '0', '0', '0'),
+(4, 2, 'P004', 'Foto Group (1-7 Orang)', 100000, '1-7 Orang\r\nCetak 10R (1 pcs)\r\nFile 2', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '99', '0', '0', '0'),
+(5, 2, 'P005', 'Foto Group (9-12 Orang)', 110000, '9-12 Orang\r\nCetak 10R (1 pcs)\r\nFile 2', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(6, 2, 'P006', 'Foto Couple', 100000, '1 Pose\r\nCetak 10R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(7, 2, 'P007', 'Foto Gandeng', 60000, '3 Lembar 3x4\r\n3 Lembar 2x3\r\n3 Lembar 4x6 + CD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(8, 3, 'P008', 'Keluarga Elegant', 600000, '4 Pose\r\nCetak 10R + Frame\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(9, 3, 'P009', 'Keluarga Eksklusif', 1000000, '3 Pose\r\n80x100 Cetak Kanvas\r\n16 R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(10, 3, 'P0010', 'Keluarga Mewah', 600000, '3 Pose 20R\r\nCetak 12R (2 Pcs)\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(11, 4, 'P0011', 'Foto Model', 100000, '1 Pose\r\nCetak 10R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(12, 4, 'P0012', 'Pas Foto', 40000, '3 Lembar 3x4\r\n3 Lembar 2x3\r\n3 Lembar 4x6\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(13, 4, 'P0013', 'Foto Close Up', 80000, '1 Pose\r\n4R (2 lembar)\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(14, 5, 'V0014', 'VIDEO SHOOTING', 2300000, 'CD Album 15 Sheet Video', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1, '0', '0', '0', '0'),
+(31, 1, '11', 'Dodi Novembri', 546798, 'sdfsdf', '5ec2af8fcb362.jpg', NULL, NULL, '2020-05-18 08:53:51', '2020-05-18 08:53:51', NULL, 0, 1, '0', '0', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -385,6 +455,38 @@ INSERT INTO `rekening` (`id`, `rekening`, `name`, `number`) VALUES
 (1, 'DANA', 'Toni Suwendi', '088215005600'),
 (3, 'GOPAY', 'Toni Suwendi', '088215005600'),
 (7, 'OVO', 'Toni Suwendi', '088215005600');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'member', 'member', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_has_permissions`
+--
+
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -533,6 +635,20 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
 -- Indexes for table `order`
 --
 ALTER TABLE `order`
@@ -575,6 +691,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -587,6 +709,19 @@ ALTER TABLE `product`
 --
 ALTER TABLE `rekening`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
 -- Indexes for table `settings`
@@ -627,13 +762,13 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -657,25 +792,25 @@ ALTER TABLE `footer`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `order_history`
 --
 ALTER TABLE `order_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `order_status`
@@ -690,6 +825,12 @@ ALTER TABLE `pages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
@@ -700,6 +841,12 @@ ALTER TABLE `product`
 --
 ALTER TABLE `rekening`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -743,6 +890,18 @@ ALTER TABLE `cart_detail`
   ADD CONSTRAINT `cart_detail_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`);
 
 --
+-- Constraints for table `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `order`
 --
 ALTER TABLE `order`
@@ -768,6 +927,13 @@ ALTER TABLE `order_history`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`);
+
+--
+-- Constraints for table `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
