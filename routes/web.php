@@ -23,8 +23,8 @@ Auth::routes([
 Route::get('/', 'FrontendController@index')->name('welcome');
 Route::get('/index', 'FrontendController@index')->name('index');
 Route::get('/products', 'FrontendController@product_list')->name('product_list.v2');
-Route::get('/products/{id}', 'FrontendController@product_list')->name('product_list');
-Route::get('/cart/{id}', 'FrontendController@cart')->name('cart');
+Route::get('/c/{id}', 'FrontendController@product_list')->name('product_list');
+Route::get('/p/{id}', 'FrontendController@cart')->name('cart');
 
 Route::get('/home', 'FrontendController@index')->name('home');
 Route::get('/contact', 'FrontendController@contact')->name('contact');
@@ -47,10 +47,13 @@ Route::name('fe.')->group(function () {
 		Route::get('fe/cart/show', 'Fe\CartController@show')->name('show');
 		Route::get('fe/cart/destroy/{id}', 'Fe\CartController@destroy')->name('destroy');
 		Route::post('fe/cart/update', 'Fe\CartController@update')->name('update');
+		Route::get('cart/delete_cart', 'Fe\CartController@destroy_all')->name('destroy_all');
+
+
 	});
 
 	Route::name('order.')->group(function () {
-		Route::get('fe/order/store', 'Fe\OrderController@store')->name('store');
+		Route::get('payment', 'Fe\OrderController@store')->name('store');
 	});	
 
 	Route::name('history.')->group(function () {

@@ -8,6 +8,10 @@ use App\Model\CartModel;
 use App\Model\CartDetailModel;
 use App\User;
 use App\Model\ProductModel;
+use App\Model\CategoryModel;
+use App\Model\Setting;
+use App\Model\Sosmed;
+use App\Model\Rekening;
 
 
 class CartController extends Controller
@@ -47,8 +51,7 @@ class CartController extends Controller
         if (empty($cek)) {
             $cart = new CartModel();    
             $cart->user_id = auth()->user()->id;
-
-            $get_price_db = ProductModel::find($request->input('id_product'));
+            $get_price_db = ProductModel::find($request->input('id'));
             $get_qty_form = $request->input('qty');
 
             $total_price = $get_price_db->price * $get_qty_form;
@@ -66,7 +69,7 @@ class CartController extends Controller
             if ($success == 1) {                
                 $cartdetail = new CartDetailModel();                    
                 $cartdetail->id_cart = $cart->id;
-                $cartdetail->id_product = $request->input('id_product');
+                $cartdetail->id_product = $request->input('id');
                 $cartdetail->qty = $request->input('qty');            
                 $cartdetail->price = $get_price_db->price;
                 $cartdetail->subtotal = $total_price;
@@ -74,11 +77,11 @@ class CartController extends Controller
                 $cartdetail->created_at =  date("Y-m-d H:i:s");
                 $cartdetail->save();
             }
-            return redirect(route('fe.index'));
+            return redirect(route('home'));
         }else{
             $get = CartModel::where('user_id', auth()->user()->id )->first();
 
-            $get_price_db = ProductModel::find($request->input('id_product'));
+            $get_price_db = ProductModel::find($request->input('id'));
             $get_qty_form = $request->input('qty');
 
             $total_price_new = $get_price_db->price * $get_qty_form;
@@ -98,7 +101,7 @@ class CartController extends Controller
             if ($updated == 1) {                
                 $cartdetail = new CartDetailModel();                    
                 $cartdetail->id_cart = $get->id;
-                $cartdetail->id_product = $request->input('id_product');
+                $cartdetail->id_product = $request->input('id');
                 $cartdetail->qty = $request->input('qty');            
                 $cartdetail->price = $get_price_db->price;
                 $cartdetail->subtotal = $total_price_new;
@@ -106,7 +109,7 @@ class CartController extends Controller
                 $cartdetail->created_at =  date("Y-m-d H:i:s");
                 $cartdetail->save();
             }
-            return redirect(route('fe.index'));
+            return redirect(route('home'));
 
         }
     }
@@ -119,6 +122,14 @@ class CartController extends Controller
      */
     public function show()
     {
+        $data['category'] = CategoryModel::all();       
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
+
         $data['cart'] = CartModel::select('cart.*', 'cart_detail.id_product', 'cart_detail.qty as qty', 'cart_detail.id as cart_detail_id', 'cart_detail.subtotal as subtotal', 'product.id as id_product', 'product.sku as sku', 'product.name as product_name', 'product.image as product_image', 'product.price as product_price')->join('cart_detail', 'cart.id', '=', 'cart_detail.id_cart')->join('product', 'cart_detail.id_product', '=', 'product.id')->where('user_id', '=', auth()->user()->id)->get();
         $data['total_price'] = CartModel::where('user_id', auth()->user()->id)->first();
         return view('fe.cart.show', $data);
@@ -188,4 +199,21 @@ class CartController extends Controller
 
         return redirect(route('fe.cart.show'));
     }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy_all()
+    {
+        $get_cart_table = CartModel::where('user_id', auth()->user()->id)->first();
+        $detail_cart    = CartDetailModel::where('id_cart', $get_cart_table->id)->delete();
+        $get_cart_table->delete();
+
+        return redirect(route('fe.cart.show'));
+    }
+
 }

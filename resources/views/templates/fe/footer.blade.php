@@ -53,7 +53,7 @@
             </div>
             <div class="item">
                 <i class="fa fa-envelope"></i>
-                <p><?= config('app.email_contact'); ?></p>
+                <p><?= config('app.email_contact') ?></p>
             </div>
         </div>
     </div>

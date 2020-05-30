@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 30, 2020 at 05:11 AM
+-- Generation Time: May 30, 2020 at 08:20 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.3.18
 
@@ -339,29 +339,30 @@ CREATE TABLE `product` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `promo_price` bigint(20) DEFAULT NULL,
-  `is_promo` tinyint(1) NOT NULL DEFAULT '0'
+  `is_promo` tinyint(1) NOT NULL DEFAULT '0',
+  `publish` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `id_category`, `sku`, `name`, `price`, `description`, `image`, `created_by`, `updated_by`, `created_at`, `updated_at`, `promo_price`, `is_promo`) VALUES
-(1, 1, 'P001', 'Prewedding Elegant', 1000000, '6 Pose + Edit (CD)\r\nCetak 10R 5+bingkai\r\nCetak 20R 1 Lembar (tanpa bingkai)\r\nKostum 1 pasang (set)\r\nMake up + Sanggul/Jilbab\r\nPas Foto', 'camera.jpg', NULL, NULL, NULL, NULL, 500000, 1),
-(2, 1, 'P002', 'Prewedding Complit', 1250000, '6 Pose + Edit (CD)\r\nCetak 10R 5 + Bingkai\r\nCetak 20R 1 + Bingkai linen\r\nKostum 1 pasang (set)\r\nMake up + Sanggul/Jilbab\r\nPas Foto\r\nX- banner\r\nBanner 1x3 M', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(3, 1, 'P003', 'Prewedding Outdoor', 2000000, 'File (seluruh) (CD)\r\nCetak 10R 5+bingkai\r\nCetak 20R 2+Frame (minimalis)\r\nPas foto\r\nX-Banner 1 (set)\r\nKostum 1 pasang (set)\r\nBanner 4x1 M\r\nMake up + Sanggul/Jilbab\r\n*Biaya belum termasuk transport/makan', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(4, 2, 'P004', 'Foto Group (1-7 Orang)', 100000, '1-7 Orang\r\nCetak 10R (1 pcs)\r\nFile 2', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(5, 2, 'P005', 'Foto Group (9-12 Orang)', 110000, '9-12 Orang\r\nCetak 10R (1 pcs)\r\nFile 2', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(6, 2, 'P006', 'Foto Couple', 100000, '1 Pose\r\nCetak 10R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(7, 2, 'P007', 'Foto Gandeng', 60000, '3 Lembar 3x4\r\n3 Lembar 2x3\r\n3 Lembar 4x6 + CD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(8, 3, 'P008', 'Keluarga Elegant', 600000, '4 Pose\r\nCetak 10R + Frame\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(9, 3, 'P009', 'Keluarga Eksklusif', 1000000, '3 Pose\r\n80x100 Cetak Kanvas\r\n16 R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(10, 3, 'P0010', 'Keluarga Mewah', 600000, '3 Pose 20R\r\nCetak 12R (2 Pcs)\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(11, 4, 'P0011', 'Foto Model', 100000, '1 Pose\r\nCetak 10R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(12, 4, 'P0012', 'Pas Foto', 40000, '3 Lembar 3x4\r\n3 Lembar 2x3\r\n3 Lembar 4x6\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(13, 4, 'P0013', 'Foto Close Up', 80000, '1 Pose\r\n4R (2 lembar)\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(14, 5, 'V0014', 'VIDEO SHOOTING', 2300000, 'CD Album 15 Sheet Video', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(31, 1, '11', 'Dodi Novembri', 546798, 'sdfsdf', '5ec2af8fcb362.jpg', NULL, NULL, '2020-05-18 08:53:51', '2020-05-18 08:53:51', NULL, 0);
+INSERT INTO `product` (`id`, `id_category`, `sku`, `name`, `price`, `description`, `image`, `created_by`, `updated_by`, `created_at`, `updated_at`, `promo_price`, `is_promo`, `publish`) VALUES
+(1, 1, 'P001', 'Prewedding Elegant', 1000000, '6 Pose + Edit (CD)\r\nCetak 10R 5+bingkai\r\nCetak 20R 1 Lembar (tanpa bingkai)\r\nKostum 1 pasang (set)\r\nMake up + Sanggul/Jilbab\r\nPas Foto', 'camera.jpg', NULL, NULL, NULL, NULL, 500000, 1, 1),
+(2, 1, 'P002', 'Prewedding Complit', 1250000, '6 Pose + Edit (CD)\r\nCetak 10R 5 + Bingkai\r\nCetak 20R 1 + Bingkai linen\r\nKostum 1 pasang (set)\r\nMake up + Sanggul/Jilbab\r\nPas Foto\r\nX- banner\r\nBanner 1x3 M', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(3, 1, 'P003', 'Prewedding Outdoor', 2000000, 'File (seluruh) (CD)\r\nCetak 10R 5+bingkai\r\nCetak 20R 2+Frame (minimalis)\r\nPas foto\r\nX-Banner 1 (set)\r\nKostum 1 pasang (set)\r\nBanner 4x1 M\r\nMake up + Sanggul/Jilbab\r\n*Biaya belum termasuk transport/makan', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(4, 2, 'P004', 'Foto Group (1-7 Orang)', 100000, '1-7 Orang\r\nCetak 10R (1 pcs)\r\nFile 2', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(5, 2, 'P005', 'Foto Group (9-12 Orang)', 110000, '9-12 Orang\r\nCetak 10R (1 pcs)\r\nFile 2', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(6, 2, 'P006', 'Foto Couple', 100000, '1 Pose\r\nCetak 10R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(7, 2, 'P007', 'Foto Gandeng', 60000, '3 Lembar 3x4\r\n3 Lembar 2x3\r\n3 Lembar 4x6 + CD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(8, 3, 'P008', 'Keluarga Elegant', 600000, '4 Pose\r\nCetak 10R + Frame\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(9, 3, 'P009', 'Keluarga Eksklusif', 1000000, '3 Pose\r\n80x100 Cetak Kanvas\r\n16 R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(10, 3, 'P0010', 'Keluarga Mewah', 600000, '3 Pose 20R\r\nCetak 12R (2 Pcs)\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(11, 4, 'P0011', 'Foto Model', 100000, '1 Pose\r\nCetak 10R\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(12, 4, 'P0012', 'Pas Foto', 40000, '3 Lembar 3x4\r\n3 Lembar 2x3\r\n3 Lembar 4x6\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(13, 4, 'P0013', 'Foto Close Up', 80000, '1 Pose\r\n4R (2 lembar)\r\nCD', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(14, 5, 'V0014', 'VIDEO SHOOTING', 2300000, 'CD Album 15 Sheet Video', 'camera.jpg', NULL, NULL, NULL, NULL, NULL, 0, 1),
+(31, 1, '11', 'Dodi Novembri', 546798, 'sdfsdf', '5ec2af8fcb362.jpg', NULL, NULL, '2020-05-18 08:53:51', '2020-05-18 08:53:51', NULL, 0, 1);
 
 -- --------------------------------------------------------
 
