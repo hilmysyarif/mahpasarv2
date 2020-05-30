@@ -39,6 +39,7 @@
              {{ auth()->user()->name }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ route('fe.history.index') }}">Lihat Semua pesanan</a>
 
               <a class="dropdown-item" href="{{ route('logout') }}"
                  onclick="event.preventDefault();

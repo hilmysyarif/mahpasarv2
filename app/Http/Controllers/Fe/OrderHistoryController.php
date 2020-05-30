@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\OrderHistoryModel;
 use App\Model\OrderModel;
+use App\Model\CategoryModel;
+use App\Model\Setting;
+use App\Model\Sosmed;
+use App\Model\Rekening;
+
 
 
 class OrderHistoryController extends Controller
@@ -17,6 +22,14 @@ class OrderHistoryController extends Controller
      */
     public function index()
     {
+        $data['category'] = CategoryModel::all();       
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['rekening'] = Rekening::all();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+
         $data['order'] = OrderModel::where('user_id', auth()->user()->id)->get();
         return view('fe.history.index', $data);
     }

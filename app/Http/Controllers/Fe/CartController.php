@@ -122,6 +122,10 @@ class CartController extends Controller
      */
     public function show()
     {
+        if (empty( auth()->user()->id)) {
+            return redirect(route('login'));
+        }
+        
         $data['category'] = CategoryModel::all();       
         $data['setting'] = Setting::find(1);
         $data['sosmed'] = Sosmed::all();

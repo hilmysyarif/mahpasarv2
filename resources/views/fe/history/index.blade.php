@@ -25,8 +25,13 @@
 									<?php $no = 0; foreach ($order as $key => $value) { $no++; ?>
 										<tr>
 											<td>{{ $no }}</td>
-											<td><a href="{{ route('fe.history.show', $value->id) }}"><u><b>RT00-{{ $value->id }}</b></u></a></td>
-											<td>{{ $value->status }}</td>											
+											<td><u><b>RT00-{{ $value->id }}</b></u></td>
+											@if($value->status == 1)
+												<td>Selesai</td>											
+
+											@else
+												<td>Menunggu pembayaran</td>											
+											@endif
 											<td>{{ $value->created_by }}</td>											
 										</tr>										
 									<?php } ?>
