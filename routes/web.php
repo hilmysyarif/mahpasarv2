@@ -22,7 +22,8 @@ Auth::routes([
 
 Route::get('/', 'FrontendController@index')->name('welcome');
 Route::get('/index', 'FrontendController@index')->name('index');
-Route::get('/product_list/{id}', 'FrontendController@product_list')->name('product_list');
+Route::get('/products', 'FrontendController@product_list')->name('product_list.v2');
+Route::get('/products/{id}', 'FrontendController@product_list')->name('product_list');
 Route::get('/cart/{id}', 'FrontendController@cart')->name('cart');
 
 Route::get('/home', 'FrontendController@index')->name('home');

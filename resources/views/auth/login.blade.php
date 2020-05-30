@@ -3,7 +3,7 @@
 @section('content')
     <div class="login-box">
       <div class="login-logo">
-        <a href="../../index2.html"><b>Ratu</b> Photografy</a>
+        <a href="{{ url('/') }}">{{ config('app.name') }}</a>
       </div>
       <!-- /.login-logo -->
       <div class="login-box-body">
@@ -12,7 +12,7 @@
         <form method="POST" action="{{ route('login') }}">
           @csrf
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" name="email" placeholder="Enter..." required="">
+            <input type="text" class="form-control" name="email" placeholder="Enter email..." required="">
             @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -21,7 +21,7 @@
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" name="password" placeholder="Enter..." required="">
+            <input type="password" class="form-control" name="password" placeholder="Password..." required="">
             @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

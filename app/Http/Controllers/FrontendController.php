@@ -31,17 +31,79 @@ class FrontendController extends Controller
         return view('welcome', $data);
     }
 
-    public function product_list($id)
+    public function product_list($id = '')
     {    	
+        $data['banner']  = Banner::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['getPromo'] = ProductModel::where('is_promo', 1)->inRandomOrder()->limit(6)->get();
     	$data['category'] = CategoryModel::all();    	
     	$data['product'] = ProductModel::where('id_category', $id)->get();
-        return view('welcome', $data);		
+        $data['best'] = ProductModel::where('is_promo', 0)->inRandomOrder()->limit(6)->get();
+        $data['recent'] = ProductModel::orderBy('created_at', 'desc')->limit(12)->get();
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['rekening'] = Rekening::all();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+
+        $data['ob'] = !empty($_GET['ob']) ? $_GET['ob'] : '';
+        $data['maxprice'] = !empty($_GET['maxprice']) ? $_GET['maxprice'] : '';
+        $data['minprice'] = !empty($_GET['minprice']) ? $_GET['minprice'] : '';
+        $data['promo'] = !empty($_GET['promo']) ? $_GET['promo'] : '';
+        $data['condition'] = !empty($_GET['condition']) ? $_GET['condition'] : '';
+        if($data['ob'] != NULL){
+            if($data['ob'] == "latest"){
+                $data['titleHead'] = 'Urutkan > Terbaru';
+                $data['products'] = (new ProductModel)->getAllProductsByCategory($id, "");
+            }else if($data['ob'] == "az"){
+                $data['titleHead'] = 'Urutkan > Abjad A-Z';
+                $data['products'] = (new ProductModel)->getAllProductsByCategory($id, "az");
+            }else if($data['ob'] == "za"){
+                $data['titleHead'] = 'Urutkan > Abjad Z-A';
+                $data['products'] = (new ProductModel)->getAllProductsByCategory($id, "za");
+            }else if($data['ob'] == "pmin"){
+                $data['titleHead'] = 'Urutkan > Harga Terendah';
+                $data['products'] = (new ProductModel)->getAllProductsByCategory($id, "pricemax");
+            }else if($data['ob'] == "pmax"){
+                $data['titleHead'] = 'Urutkan > Harga Tertinggi';
+                $data['products'] = (new ProductModel)->getAllProductsByCategory($id, "pricemin");
+            }
+        }else if($data['minprice'] != NULL || $data['maxprice'] != NULL){
+            if($data['minprice'] == ""){
+                $data['minprice'] = "0";
+                $data['titleHead'] = 'Harga > ' . $data['minprice'] . ' - ' . $data['maxprice'];
+            }else if($data['maxprice'] == ""){
+                $data['maxprice'] = "0";
+                $data['titleHead'] = 'Harga > ' . $data['minprice'] . " -->";
+            }else if($data['maxprice'] < $data['minprice']){
+                $data['maxprice'] = "0";
+                $data['titleHead'] = 'Harga > ' . $data['minprice'] . " -->";
+            }else{
+                $data['titleHead'] = 'Harga > ' . $data['minprice'] . ' - ' . $data['maxprice'];
+            }
+            $data['products'] = (new ProductModel)->getAllProductsByCategoryPrice($id, $data['minprice'], $data['maxprice']);
+        }else if($data['promo'] != NULL && $data['promo'] == "true"){
+            $data['titleHead'] = 'Penawaran > Promo';
+            $data['products'] = (new ProductModel)->getAllProductsByCategory($id, "promo");
+        }else{
+            $data['titleHead'] = '';
+            $data['products'] = (new ProductModel)->getAllProductsByCategory($id, "");
+        }
+        $data['title'] = 'Semua Produk - ' . config('app.name');
+        $data['nameCat'] = !empty($id) ? (new CategoryModel)->getCategoryById($id)->category_name : 'Semua Produk';
+        return view('fe.category_detail', $data);		
     }
 
     public function cart($id)
     {
         $data['category'] = CategoryModel::all();
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
         $data['product'] = ProductModel::find($id);
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
         $data['product_list'] = ProductModel::where('id_category', $id)->get();
         return view('fe.cart', $data);
     }
