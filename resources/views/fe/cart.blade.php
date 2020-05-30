@@ -1,4 +1,7 @@
 @extends('layouts.fe')
+@section('internal-css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/detail.css') }}">
+@endsection
 
 @section('content')   
 

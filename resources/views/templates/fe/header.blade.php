@@ -32,33 +32,6 @@
       </ul>
       <br>
 
-      @if(auth()->user())
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             {{ auth()->user()->name }}
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{ route('fe.history.index') }}">Lihat Semua pesanan</a>
-
-              <a class="dropdown-item" href="{{ route('logout') }}"
-                 onclick="event.preventDefault();
-                               document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }}
-              </a>
-
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf
-              </form>
-            </div>
-          </li>
-        </ul>
-
-      @else
-        <a class="nav-link text-light" href="{{ url('login') }}">Login</a>
-        <a class="nav-link text-light" href="{{ url('register') }}">Register</a>
-      @endif
-
       <a href="{{ route('fe.cart.show') }}" class="text-light navbar-cart-inform">
         <i class="fa fa-shopping-cart"></i>
         <?php  
@@ -73,6 +46,32 @@
         Keranjang ({{ $cart }})
 
       </a>
+
+      @if(auth()->user())
+        <div class="dropdown">
+          <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           {{ auth()->user()->name }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ route('fe.history.index') }}">Lihat Semua pesanan</a>
+
+            <a class="dropdown-item" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+          </div>
+        </div>
+
+      @else
+        <a class="nav-link text-light" href="{{ url('login') }}">Login</a>
+        <a class="nav-link text-light" href="{{ url('register') }}">Register</a>
+      @endif
+
 
       <br>
       <br>

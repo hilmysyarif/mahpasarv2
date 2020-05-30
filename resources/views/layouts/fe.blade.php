@@ -15,9 +15,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style-responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/products.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/product-responsive.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/cart.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/detail.css') }}">
 
+    @yield('internal-css')
 
     <link
       rel="shortcut icon"
@@ -76,6 +75,27 @@
     <script src="{{ asset('lightbox2-2.11.1/dist/js/lightbox.js') }}"></script>
     <script src="{{ asset('select2-4.0.6-rc.1/dist/js/select2.min.js') }}"></script>
     <script>
+
+         $("#countdownPromo").countdown({
+             date: "<?= $setting['promo_time']; ?>",
+             render: function (data) {
+                 var el = $(this.el);
+                 el.empty()
+                 .append(
+                     this.leadingZeros(data.days, 2) + " : "
+                 )
+                 .append(
+                     this.leadingZeros(data.hours, 2) + " : "
+                 )
+                 .append(
+                     this.leadingZeros(data.min, 2) + " : "
+                 )
+                 .append(
+                     this.leadingZeros(data.sec, 2)
+                 );
+             },
+         });
+
         $('.recent-product').slick({
             infinite: false,
             slidesToShow: 6,

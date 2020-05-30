@@ -1,6 +1,10 @@
 
 @extends('layouts.fe')
 
+@section('internal-css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/cart.css') }}">
+@endsection
+
 @section('content')   
 <div class="wrapper">
     <div class="navigation">

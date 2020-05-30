@@ -25,6 +25,7 @@ Route::get('/index', 'FrontendController@index')->name('index');
 Route::get('/products', 'FrontendController@product_list')->name('product_list.v2');
 Route::get('/c/{id}', 'FrontendController@product_list')->name('product_list');
 Route::get('/p/{id}', 'FrontendController@cart')->name('cart');
+Route::get('/promo', 'FrontendController@promo')->name('promo');
 
 Route::get('/home', 'FrontendController@index')->name('home');
 Route::get('/contact', 'FrontendController@contact')->name('contact');

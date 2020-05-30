@@ -221,4 +221,19 @@ class FrontendController extends Controller
         return view('fe.testimoni', $data);
         
     }
+
+    public function promo()
+    {
+        $data['promo'] = ProductModel::where('is_promo', 1)->inRandomOrder()->get();
+        $data['category'] = CategoryModel::all();
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
+        return view('fe.promo', $data);
+        
+    }
+
 }
