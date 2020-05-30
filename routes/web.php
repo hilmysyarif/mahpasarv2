@@ -27,6 +27,15 @@ Route::get('/products/{id}', 'FrontendController@product_list')->name('product_l
 Route::get('/cart/{id}', 'FrontendController@cart')->name('cart');
 
 Route::get('/home', 'FrontendController@index')->name('home');
+Route::get('/contact', 'FrontendController@contact')->name('contact');
+Route::get('/about', 'FrontendController@about')->name('about');
+Route::get('/privacy-policy', 'FrontendController@policy')->name('policy');
+Route::get('/terms', 'FrontendController@terms')->name('terms');
+Route::get('/shopping-help', 'FrontendController@shopping_help')->name('shopping-help');
+Route::get('/pengiriman-barang', 'FrontendController@pengiriman_barang')->name('pengiriman-barang');
+
+
+
 Route::get('/admin', 'HomeController@index')->middleware(CheckRole::class)->name('admin');
 
 Route::name('fe.')->group(function () {

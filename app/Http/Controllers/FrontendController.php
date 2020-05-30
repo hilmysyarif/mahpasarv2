@@ -9,6 +9,7 @@ use App\Model\Banner;
 use App\Model\Setting;
 use App\Model\Sosmed;
 use App\Model\Rekening;
+use App\Model\Page;
 
 
 class FrontendController extends Controller
@@ -106,5 +107,100 @@ class FrontendController extends Controller
         $data['rekening'] = Rekening::all();
         $data['product_list'] = ProductModel::where('id_category', $id)->get();
         return view('fe.cart', $data);
+    }
+
+    public function about()
+    {
+        $slug = 'about';
+
+        $data['content']  = Page::where('slug', $slug)->first();
+        $data['category'] = CategoryModel::all();
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
+        // return $data['content'];
+        return view('fe.pages', $data);
+    }
+
+    public function contact()
+    {
+        $slug = 'contact';
+
+        $data['content']  = Page::where('slug', $slug)->first();
+        $data['category'] = CategoryModel::all();
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
+        // return $data['content'];
+        return view('fe.pages', $data);
+        
+    }
+
+    public function policy()
+    {
+        $slug = 'privacy-policy';
+        $data['content']  = Page::where('slug', $slug)->first();
+        $data['category'] = CategoryModel::all();
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
+        // return $data['content'];
+        return view('fe.pages', $data);
+        
+    }
+    public function terms()
+    {
+        $slug = 'terms';
+        $data['content']  = Page::where('slug', $slug)->first();
+        $data['category'] = CategoryModel::all();
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
+        // return $data['content'];
+        return view('fe.pages', $data);
+        
+    }
+
+    public function shopping_help()
+    {
+        $slug = 'shopping-help';
+        $data['content']  = Page::where('slug', $slug)->first();
+        $data['category'] = CategoryModel::all();
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
+        // return $data['content'];
+        return view('fe.pages', $data);
+        
+    }
+    public function pengiriman_barang()
+    {
+        $slug = 'pengiriman-barang';
+        $data['content']  = Page::where('slug', $slug)->first();
+        $data['category'] = CategoryModel::all();
+        $data['setting'] = Setting::find(1);
+        $data['sosmed'] = Sosmed::all();
+        $data['categoriesLimit'] = CategoryModel::limit(5)->get();
+        $data['footerinfo'] = (new Setting)->getFooterInfo();
+        $data['footerhelp'] = (new Setting)->getFooterHelp();
+        $data['rekening'] = Rekening::all();
+        // return $data['content'];
+        return view('fe.pages', $data);
+        
     }
 }
