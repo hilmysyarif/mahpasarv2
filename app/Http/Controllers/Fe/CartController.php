@@ -51,8 +51,7 @@ class CartController extends Controller
         if (empty($cek)) {
             $cart = new CartModel();    
             $cart->user_id = auth()->user()->id;
-
-            $get_price_db = ProductModel::find($request->input('id_product'));
+            $get_price_db = ProductModel::find($request->input('id'));
             $get_qty_form = $request->input('qty');
 
             $total_price = $get_price_db->price * $get_qty_form;
@@ -70,7 +69,7 @@ class CartController extends Controller
             if ($success == 1) {                
                 $cartdetail = new CartDetailModel();                    
                 $cartdetail->id_cart = $cart->id;
-                $cartdetail->id_product = $request->input('id_product');
+                $cartdetail->id_product = $request->input('id');
                 $cartdetail->qty = $request->input('qty');            
                 $cartdetail->price = $get_price_db->price;
                 $cartdetail->subtotal = $total_price;
@@ -78,11 +77,11 @@ class CartController extends Controller
                 $cartdetail->created_at =  date("Y-m-d H:i:s");
                 $cartdetail->save();
             }
-            return redirect(route('fe.index'));
+            return redirect(route('home'));
         }else{
             $get = CartModel::where('user_id', auth()->user()->id )->first();
 
-            $get_price_db = ProductModel::find($request->input('id_product'));
+            $get_price_db = ProductModel::find($request->input('id'));
             $get_qty_form = $request->input('qty');
 
             $total_price_new = $get_price_db->price * $get_qty_form;
@@ -102,7 +101,7 @@ class CartController extends Controller
             if ($updated == 1) {                
                 $cartdetail = new CartDetailModel();                    
                 $cartdetail->id_cart = $get->id;
-                $cartdetail->id_product = $request->input('id_product');
+                $cartdetail->id_product = $request->input('id');
                 $cartdetail->qty = $request->input('qty');            
                 $cartdetail->price = $get_price_db->price;
                 $cartdetail->subtotal = $total_price_new;

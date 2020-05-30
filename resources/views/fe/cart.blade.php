@@ -78,8 +78,12 @@
                     </tr>
                 </table>
                 <hr>
-                <button class="btn btn-warning pl-5 pr-5" onclick="buy()">Beli</button>
-                <button class="btn btn-primary" onclick="addCart()">Tambah ke Keranjang</button>
+                @if($product['stock'] <= 0)
+                    <button class="btn btn-danger pl-5 pr-5">Stock Habis</button>
+                @else
+                    <button class="btn btn-warning pl-5 pr-5" onclick="buy()">Beli</button>
+                    <button class="btn btn-primary" onclick="addCart()">Tambah ke Keranjang</button>
+                @endif
             </div>
         </div>
     </div>
@@ -145,23 +149,25 @@
 
     function buy(){
         $.ajax({
-            url: "<?= url(''); ?>cart/add_to_cart",
+            url: "<?= route('fe.cart.store'); ?>",
             type: "post",
             data: {
+                "_token": "{{ csrf_token() }}",
                 id: <?= $product->id; ?>,
                 qty: $("#qtyProduct").val()
             },
             success: function(data){
-                location.href = "<?= url(''); ?>cart"
+                location.href = "<?= route('fe.cart.show'); ?>"
             }
         })
     }
 
     function addCart(){
         $.ajax({
-            url: "<?= url(''); ?>cart/add_to_cart",
+            url: "<?= route('fe.cart.store'); ?>",
             type: "post",
             data: {
+                "_token": "{{ csrf_token() }}",
                 id: <?= $product->id; ?>,
                 qty: $("#qtyProduct").val()
             },
@@ -176,7 +182,7 @@
                     })
                     .then((cart) => {
                     if (cart) {
-                        location.href = "<?= url(''); ?>cart"
+                        location.href = "<?= route('fe.cart.show'); ?>"
                     }
                 });
             }
