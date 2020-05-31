@@ -50,6 +50,8 @@
 
                   @endif
                   <input type="file" min="0" class="form-control" name="icon" placeholder="Enter ...">
+                  <small>Icon must be in 96x96 and PNG format</small>
+                  
                 </div>                                                       
                 <br>
                 <button type="submit" class="btn btn-success">Save</button>
