@@ -74,6 +74,16 @@ Route::name('fe.')->group(function () {
 });
 
 Route::name('admin.')->group(function () {
+	Route::name('categories.')->group(function () {
+		Route::get('admin/categories', 'Admin\CategoriesController@index')->name('index');
+		Route::get('admin/categories/create', 'Admin\CategoriesController@create')->name('create');
+		Route::post('admin/categories/store', 'Admin\CategoriesController@store')->name('store');
+		Route::get('admin/categories/show/{id}', 'Admin\CategoriesController@show')->name('show');
+		Route::get('admin/categories/edit/{id}', 'Admin\CategoriesController@edit')->name('edit');
+		Route::post('admin/categories/update/{id}', 'Admin\CategoriesController@update')->name('update');
+		Route::post('admin/categories/destroy/{id}', 'Admin\CategoriesController@destroy')->name('destroy');
+	});
+
 	Route::name('product.')->group(function () {
 		Route::get('admin/product/index', 'Admin\ProductController@index')->name('index');
 		Route::get('admin/product/create', 'Admin\ProductController@create')->name('create');

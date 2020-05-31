@@ -25,6 +25,13 @@
         </li>        
         <li class="header">MASTER DATA</li>      
         <li class="">
+          <a href="{{ route('admin.categories.index') }}">
+            <i class="fa fa-tags"></i>
+            <span>Categories</span>
+          </a>
+        </li>  
+
+        <li class="">
           <a href="{{ route('admin.product.index') }}">
             <i class="fa fa-gg-circle"></i>
             <span>Products</span>
