@@ -47,6 +47,20 @@ Route::get('/clear', function() {
 
 });
 
+Route::get('/dbmigrate', function() {
+
+   Artisan::call('migrate');
+   return "DB Migrated!";
+
+});
+
+Route::get('/dbmigraterollback', function() {
+
+   Artisan::call('migrate:rollback --step=1');
+   return "DB Migrated!";
+
+});
+
 Route::get('/admin', 'HomeController@index')->middleware(CheckRole::class)->name('admin');
 
 Route::name('fe.')->group(function () {
@@ -85,7 +99,7 @@ Route::name('admin.')->group(function () {
 	});
 
 	Route::name('product.')->group(function () {
-		Route::get('admin/product/index', 'Admin\ProductController@index')->name('index');
+		Route::get('admin/product', 'Admin\ProductController@index')->name('index');
 		Route::get('admin/product/create', 'Admin\ProductController@create')->name('create');
 		Route::post('admin/product/store', 'Admin\ProductController@store')->name('store');
 		Route::get('admin/product/show/{id}', 'Admin\ProductController@show')->name('show');
@@ -113,4 +127,13 @@ Route::name('admin.')->group(function () {
 		Route::post('admin/order_status/update/{id}', 'Admin\OrderStatusController@update')->name('update');
 		Route::post('admin/order_status/destroy/{id}', 'Admin\OrderStatusController@destroy')->name('destroy');
 	});		
+
+	Route::name('vouchers.')->group(function () {
+		Route::get('admin/vouchers', 'Admin\VouchersController@index')->name('index');
+		Route::get('admin/vouchers/create', 'Admin\VouchersController@create')->name('create');
+		Route::post('admin/vouchers/store', 'Admin\VouchersController@store')->name('store');
+		Route::get('admin/vouchers/show/{id}', 'Admin\VouchersController@show')->name('show');
+		Route::post('admin/vouchers/destroy/{id}', 'Admin\VouchersController@destroy')->name('destroy');
+	});
+
 });

@@ -30,6 +30,16 @@ class FrontendController extends Controller
         $data['footerinfo'] = (new Setting)->getFooterInfo();
         $data['footerhelp'] = (new Setting)->getFooterHelp();
 
+        if(!isset($_COOKIE['ref_code'])){
+            if(isset($_GET['ref_code']) && !empty($_GET['ref_code'])) {
+                $ref = trim($_GET['ref_code']);
+                setcookie('ref_code', $ref, time() + 2147483647);
+            }else{
+                setcookie('ref_code', 'admin', time() + 2147483647);
+            }
+            return redirect('/');
+        }
+
         return view('welcome', $data);
     }
 

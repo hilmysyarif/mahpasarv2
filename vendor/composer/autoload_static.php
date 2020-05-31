@@ -121,6 +121,10 @@ class ComposerStaticInit62ccbfe75e8cd0c75ca6aab2cd0563b5
             'Illuminate\\Foundation\\Auth\\' => 27,
             'Illuminate\\' => 11,
         ),
+        'H' => 
+        array (
+            'Hashids\\' => 8,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -367,6 +371,10 @@ class ComposerStaticInit62ccbfe75e8cd0c75ca6aab2cd0563b5
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
+        'Hashids\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hashids/hashids/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -473,6 +481,7 @@ class ComposerStaticInit62ccbfe75e8cd0c75ca6aab2cd0563b5
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Admin\\CategoriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CategoriesController.php',
         'App\\Http\\Controllers\\Admin\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/OrderController.php',
         'App\\Http\\Controllers\\Admin\\OrderStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/OrderStatusController.php',
         'App\\Http\\Controllers\\Admin\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProductController.php',
@@ -506,10 +515,14 @@ class ComposerStaticInit62ccbfe75e8cd0c75ca6aab2cd0563b5
         'App\\Model\\OrderModel' => __DIR__ . '/../..' . '/app/Model/OrderModel.php',
         'App\\Model\\OrderStatusModel' => __DIR__ . '/../..' . '/app/Model/OrderStatusModel.php',
         'App\\Model\\Page' => __DIR__ . '/../..' . '/app/Model/Page.php',
+        'App\\Model\\PointType' => __DIR__ . '/../..' . '/app/Model/PointType.php',
         'App\\Model\\ProductModel' => __DIR__ . '/../..' . '/app/Model/ProductModel.php',
         'App\\Model\\Rekening' => __DIR__ . '/../..' . '/app/Model/Rekening.php',
         'App\\Model\\Setting' => __DIR__ . '/../..' . '/app/Model/Setting.php',
         'App\\Model\\Sosmed' => __DIR__ . '/../..' . '/app/Model/Sosmed.php',
+        'App\\Model\\Testimoni' => __DIR__ . '/../..' . '/app/Model/Testimoni.php',
+        'App\\Model\\Voucher' => __DIR__ . '/../..' . '/app/Model/Voucher.php',
+        'App\\Model\\Wallet' => __DIR__ . '/../..' . '/app/Model/Wallet.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -1429,6 +1442,12 @@ class ComposerStaticInit62ccbfe75e8cd0c75ca6aab2cd0563b5
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+        'Hashids\\Hashids' => __DIR__ . '/..' . '/hashids/hashids/src/Hashids.php',
+        'Hashids\\HashidsException' => __DIR__ . '/..' . '/hashids/hashids/src/HashidsException.php',
+        'Hashids\\HashidsInterface' => __DIR__ . '/..' . '/hashids/hashids/src/HashidsInterface.php',
+        'Hashids\\Math\\Bc' => __DIR__ . '/..' . '/hashids/hashids/src/Math/Bc.php',
+        'Hashids\\Math\\Gmp' => __DIR__ . '/..' . '/hashids/hashids/src/Math/Gmp.php',
+        'Hashids\\Math\\MathInterface' => __DIR__ . '/..' . '/hashids/hashids/src/Math/MathInterface.php',
         'Highlight\\Autoloader' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/Autoloader.php',
         'Highlight\\HighlightResult' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/HighlightResult.php',
         'Highlight\\Highlighter' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/Highlighter.php',

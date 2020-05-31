@@ -12,6 +12,24 @@
         <form  method="POST" action="{{ route('register') }}">
             @csrf
           <div class="form-group has-feedback">
+            <input type="text" class="form-control" name="ref_parent" placeholder="Referral Code" value="{{ $_COOKIE['ref_code'] }}" readonly="">
+                                    @error('ref_code')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror        
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" name="username" placeholder="Username">
+                                    @error('username')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror        
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
             <input type="text" class="form-control" name="name" placeholder="Full name">
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -41,6 +59,24 @@
           <div class="form-group has-feedback">
             <input type="password" class="form-control" name="password_confirmation" placeholder="Retype password">
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" name="phone" placeholder="Phone / WA Number">
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror        
+            <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" name="pin_trx" placeholder="Pin Transaction">
+                                    @error('pin_trx')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror        
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
             <div class="col-xs-8">
