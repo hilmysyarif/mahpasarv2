@@ -54,8 +54,8 @@
                     <td><?= $no ?></td>
                     <td><u><b>{{ $value->upline->name }}</b></u></td>
                     <td><u><b>{{ !empty($value->claim_user) ? $value->claim_user->name : 'Not Claimed' }}</b></u></td>
-                    <td><a data-toggle="modal" data-target="#modal-info-{{ $value->id }}" href="javascript::"><i class="fa  fa-eye"></i></a></td>
-                    <td><a data-toggle="modal" data-target="#modal-danger-{{ $value->id }}" href="javascript::"><i class="fa  fa-trash"></i></a></td>
+                    <td class="voucher_code-{{ $value->id }}"><a data-toggle="modal" data-target="#modal-info-{{ $value->id }}" href="javascript:void(0);"><i class="fa  fa-eye"></i></a></td>
+                    <td><a data-toggle="modal" data-target="#modal-danger-{{ $value->id }}" href="javascript:void(0);"><i class="fa  fa-trash"></i></a></td>
                   </tr>
 
                   <div class="modal modal-info fade" id="modal-info-{{ $value->id }}">
@@ -64,18 +64,16 @@
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">Show Voucher Code</h4>
+                          <h4 class="modal-title">Lihat Voucher Code</h4>
                         </div>
                         <div class="modal-body">
-                          <p>Are you sure want to see this voucher ?</p>
-                          <p>Please input your Pin Transaction below</p>
+                          <p>Anda yakin ingin melihat voucher code ini ?</p>
+                          <p>Input PIN Trx anda dibawah ini</p>
                           <input type="password" name="pin_trx" class="form-control" autocomplete="off">
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                          <form method="POST" action="javascript:void(0);">
-                          <button type="submit" class="btn btn-outline">Yes</button>                          
-                          </form>
+                          <a onclick="showVoucher('{{ $value->id }}')" class="btn btn-outline">Kirim</a>                          
                         </div>
                       </div>
                       <!-- /.modal-content -->
@@ -89,16 +87,16 @@
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">Delete Data</h4>
+                          <h4 class="modal-title">Hapus Data</h4>
                         </div>
                         <div class="modal-body">
-                          <p>Are you sure want to delete this record ?</p>
+                          <p>Anda yakin ingin menghapus voucher code ini ?</p>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
                           <form method="POST" action="{{ route('admin.vouchers.destroy', $value->id) }}">
                             @csrf
-                          <button type="submit" class="btn btn-outline">Delete</button>                          
+                          <button type="submit" class="btn btn-outline">Ya</button>                          
                           </form>
                         </div>
                       </div>
@@ -120,4 +118,43 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+  function showVoucher(row_id)
+  {
+    var el_pin_trx = $('#modal-info-' + row_id).find('[name=pin_trx]');
+    if(el_pin_trx.val() == ''){
+      alert('Maaf, anda harus memasukkan PIN Trx!')
+    }else{
+        $.ajax({
+           type:'POST',
+           url:'/check_pin_trx',
+           data: {
+              _token: '<?php echo csrf_token() ?>',
+              pin_trx: el_pin_trx.val(),
+            },
+           success:function(data) {
+              if(JSON.parse(data).success == true){
+                $('#modal-info-' + row_id).modal('hide');
+                $.ajax({
+                   type:'GET',
+                   url: window.location.href + '/getJson/' + row_id,
+                   data: {
+                      _token: '<?php echo csrf_token() ?>',
+                    },
+                   success:function(data) {
+                      $('.voucher_code-' + row_id).children().replaceWith('<u><b>' + JSON.parse(data).voucher_code + '</b></u>');
+                   }
+                });   
+              }else{
+                alert('Maaf, PIN Trx anda salah!')
+              }
+           }
+        });      
+    }
+  }
+
+</script>
 @endsection

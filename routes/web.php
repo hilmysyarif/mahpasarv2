@@ -61,6 +61,9 @@ Route::get('/dbmigraterollback', function() {
 
 });
 
+Route::post('/check_pin_trx', 'Controller@check_pin_trx')->name('check_pin_trx');
+
+
 Route::get('/admin', 'HomeController@index')->middleware(CheckRole::class)->name('admin');
 
 Route::name('fe.')->group(function () {
@@ -134,6 +137,8 @@ Route::name('admin.')->group(function () {
 		Route::post('admin/vouchers/store', 'Admin\VouchersController@store')->name('store');
 		Route::get('admin/vouchers/show/{id}', 'Admin\VouchersController@show')->name('show');
 		Route::post('admin/vouchers/destroy/{id}', 'Admin\VouchersController@destroy')->name('destroy');
+		Route::get('admin/vouchers/getJson/{id}', 'Admin\VouchersController@getJson')->name('getJson');
+
 	});
 
 });

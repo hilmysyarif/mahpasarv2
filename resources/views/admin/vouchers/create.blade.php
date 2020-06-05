@@ -37,20 +37,20 @@
               <form role="form" method="POST" action="{{ route('admin.vouchers.store') }}" enctype="multipart/form-data">  
                 @csrf                            
                 <div class="form-group">
-                  <label>Prefix</label>
+                  <label>Kode Depan</label>
                   <input type="text" min="0" class="form-control" name="prefix_code" placeholder="Enter ..." required>
                 </div>      
                 <div class="form-group">
-                  <label>Length</label>
+                  <label>Panjang Kode Unik</label>
                   <input type="text" min="0" class="form-control" name="length" placeholder="Enter ..." required>
                 </div>
                 <div class="form-group">
-                  <label>Generate Number</label>
+                  <label>Jumlah Total Generate</label>
                   <input type="text" min="0" class="form-control" name="generate_num" placeholder="Enter ..." required>
                 </div>
 
                 <div class="form-group">
-                  <label>Distribute For</label>
+                  <label>Untuk User ?</label>
                   <select class="form-control" name="upline_id" required>
                     <option>-- Select --</option>
                     <?php foreach ($users as $key => $value) { ?>
@@ -58,7 +58,10 @@
                     <?php } ?>                    
                   </select>
                 </div>
-
+                <div class="form-group">
+                  <label>PIN Trx</label>
+                  <input type="password" min="0" class="form-control" name="pin_trx" placeholder="Enter ..." required>
+                </div>
 
                 <br>
                 <button type="submit" class="btn btn-success">Save</button>

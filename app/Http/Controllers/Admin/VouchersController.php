@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\ProductModel;
 use App\Model\CategoryModel;
 use App\Model\Voucher;
+use App\User;
 use Illuminate\Support\Facades\Validator;
 use Hashids\Hashids;
 
@@ -20,7 +21,7 @@ class VouchersController extends Controller
      */
     public function index()
     {
-        $data['vouchers'] = Voucher::all();
+        $data['vouchers'] = Voucher::latest()->get();
         return view('admin.vouchers.index', $data);
     }
 
@@ -59,20 +60,27 @@ class VouchersController extends Controller
             'prefix_code' => ['required', 'string'],
             'length' => ['required'],
             'generate_num' => ['required', 'min:1'],
+            'pin_trx' => ['required']
         ]);
 
         if ($validate->fails()) {
             return redirect(route('admin.vouchers.create'))->with('error', $validate->messages());            
         }else{
-            for ($i=1; $i <= $request->input('generate_num') ; $i++) { 
-                $vouchers = new Voucher();            
-                $vouchers->upline_id = $request->input('upline_id');
-                $voucher_code = $request->input('prefix_code') . $this->generateRandomString($request->input('length')); 
-                $vouchers->voucher_code = $voucher_code;
-                $vouchers->save();
+            $check_pin_trx = User::where('id', auth()->user()->id)->where('pin_trx', $request->pin_trx)->first();
+            if(empty($check_pin_trx)){
+                return redirect(route('admin.vouchers.index'))->with('message', 'PIN Trx salah !');                
+            }else{
+                for ($i=1; $i <= $request->input('generate_num') ; $i++) { 
+                    $vouchers = new Voucher();            
+                    $vouchers->upline_id = $request->input('upline_id');
+                    $voucher_code = $request->input('prefix_code') . $this->generateRandomString($request->input('length')); 
+                    $vouchers->voucher_code = $voucher_code;
+                    $vouchers->save();
 
+                }
+                return redirect(route('admin.vouchers.index'))->with('message', 'Vouchers success Added !');                
             }
-            return redirect(route('admin.vouchers.index'))->with('message', 'Vouchers success Added !');
+
         }
     }
 
@@ -122,4 +130,17 @@ class VouchersController extends Controller
         return redirect(route('admin.vouchers.index'))->with('message', 'Vouchers success Deleted !');
 
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getJson($id)
+    {
+        $find = Voucher::find($id);
+        return json_encode($find);
+    }
+
 }
