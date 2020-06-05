@@ -71,12 +71,40 @@ class VouchersController extends Controller
                 return redirect(route('admin.vouchers.index'))->with('message', 'PIN Trx salah !');                
             }else{
                 for ($i=1; $i <= $request->input('generate_num') ; $i++) { 
-                    $vouchers = new Voucher();            
-                    $vouchers->upline_id = $request->input('upline_id');
                     $voucher_code = $request->input('prefix_code') . $this->generateRandomString($request->input('length')); 
-                    $vouchers->voucher_code = $voucher_code;
-                    $vouchers->save();
 
+                    // Add function to check the DB after generate
+                    // For security to generate double code
+                    //
+                    $check_voucher = Voucher::where('voucher_code', $voucher_code)->count();
+                    if($check_voucher > 0){
+                        $voucher_code2 = $request->input('prefix_code') . $this->generateRandomString($request->input('length')); 
+                        $check_voucher2 = Voucher::where('voucher_code', $voucher_code2)->count();
+
+                        if($check_voucher2 > 0){
+                            $voucher_code3 = $request->input('prefix_code') . $this->generateRandomString($request->input('length')); 
+                            $check_voucher3 = Voucher::where('voucher_code', $voucher_code3)->count();
+
+                            if($check_voucher3 > 0){
+                                // Skipping after 3 times generate code still exists.
+                            }else{
+                                $vouchers = new Voucher();            
+                                $vouchers->upline_id = $request->input('upline_id');
+                                $vouchers->voucher_code = $voucher_code3;
+                                $vouchers->save();                                   
+                            }
+                        }else{
+                            $vouchers = new Voucher();            
+                            $vouchers->upline_id = $request->input('upline_id');
+                            $vouchers->voucher_code = $voucher_code2;
+                            $vouchers->save();                                 
+                        }
+                    }else{
+                        $vouchers = new Voucher();            
+                        $vouchers->upline_id = $request->input('upline_id');
+                        $vouchers->voucher_code = $voucher_code;
+                        $vouchers->save();                        
+                    }
                 }
                 return redirect(route('admin.vouchers.index'))->with('message', 'Vouchers success Added !');                
             }
