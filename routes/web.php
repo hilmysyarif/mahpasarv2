@@ -64,7 +64,33 @@ Route::get('/dbmigraterollback', function() {
 Route::post('/check_pin_trx', 'Controller@check_pin_trx')->name('check_pin_trx');
 
 
-Route::get('/admin', 'HomeController@index')->middleware(CheckRole::class)->name('admin');
+
+// Route::get('/admin', 'HomeController@index')->middleware([CheckRole::class, 'asd'])->name('admin');
+Route::group(['middleware' => ['auth', 'CheckRole:seller']],function(){
+	Route::get('/seller','HomeController@index')->name('seller.dashboard');
+
+	Route::name('seller.')->group(function () {
+		Route::name('categories.')->group(function () {
+			Route::get('seller/categories', 'Seller\CategoriesController@index')->name('index');
+			Route::get('seller/categories/create', 'Seller\CategoriesController@create')->name('create');
+			Route::post('seller/categories/store', 'Seller\CategoriesController@store')->name('store');
+			Route::get('seller/categories/show/{id}', 'Seller\CategoriesController@show')->name('show');
+			Route::get('seller/categories/edit/{id}', 'Seller\CategoriesController@edit')->name('edit');
+			Route::post('seller/categories/update/{id}', 'Seller\CategoriesController@update')->name('update');
+			Route::post('seller/categories/destroy/{id}', 'Seller\CategoriesController@destroy')->name('destroy');
+		});
+		Route::name('product.')->group(function () {
+			Route::get('seller/product', 'Seller\ProductController@index')->name('index');
+			Route::get('seller/product/create', 'Seller\ProductController@create')->name('create');
+			Route::post('seller/product/store', 'Seller\ProductController@store')->name('store');
+			Route::get('seller/product/show/{id}', 'Seller\ProductController@show')->name('show');
+			Route::get('seller/product/edit/{id}', 'Seller\ProductController@edit')->name('edit');
+			Route::post('seller/product/update/{id}', 'Seller\ProductController@update')->name('update');
+			Route::post('seller/product/destroy/{id}', 'Seller\ProductController@destroy')->name('destroy');
+		});
+	});
+});
+
 
 Route::name('fe.')->group(function () {
 	Route::get('fe/index', 'FrontendController@index')->name('index');
