@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Model\OrderDetailModel;
 use Illuminate\Http\Request;
 use App\Model\OrderModel;
 use App\Model\OrderHistoryModel;
@@ -18,7 +19,14 @@ class OrderController extends Controller
 
     public function index()
     {
-        $data['order'] = OrderModel::all();
+        // $data['order'] = OrderModel::where('user_id', 2)->get();
+        // $order_detail = OrderModel::with(['OrderDetail' => function ($qry) {
+        //     return $qry
+        // }]);dd($order_detail->get());
+        $data['order'] = OrderDetailModel::with([
+            'Product' => function ($qry) {
+                return $qry->where('user_id', auth()->user()->id)->get();
+            }] )->get();
         $data['orderstatus'] = OrderStatusModel::all();
         return view('admin.order.index', $data);
     }

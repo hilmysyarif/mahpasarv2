@@ -88,6 +88,33 @@ Route::group(['middleware' => ['auth', 'CheckRole:seller']],function(){
 			Route::post('seller/product/update/{id}', 'Seller\ProductController@update')->name('update');
 			Route::post('seller/product/destroy/{id}', 'Seller\ProductController@destroy')->name('destroy');
 		});
+		Route::name('order.')->group(function () {
+			Route::get('seller/order/index', 'Seller\OrderController@index')->name('index');
+			Route::get('seller/order/create', 'Seller\OrderController@create')->name('create');
+			Route::post('seller/order/store', 'Seller\OrderController@store')->name('store');
+			Route::get('seller/order/show/{id}', 'Seller\OrderController@show')->name('show');
+			Route::get('seller/order/edit/{id}', 'Seller\OrderController@edit')->name('edit');
+			Route::post('seller/order/update/{id}', 'Seller\OrderController@update')->name('update');
+			Route::post('seller/order/destroy/{id}', 'Seller\OrderController@destroy')->name('destroy');
+		});	
+		Route::name('order_status.')->group(function () {
+			Route::get('seller/order_status/index', 'Seller\OrderStatusController@index')->name('index');
+			Route::get('seller/order_status/create', 'Seller\OrderStatusController@create')->name('create');
+			Route::post('seller/order_status/store', 'Seller\OrderStatusController@store')->name('store');
+			Route::get('seller/order_status/show/{id}', 'Seller\OrderStatusController@show')->name('show');
+			Route::get('seller/order_status/edit/{id}', 'Seller\OrderStatusController@edit')->name('edit');
+			Route::post('seller/order_status/update/{id}', 'Seller\OrderStatusController@update')->name('update');
+			Route::post('seller/order_status/destroy/{id}', 'Seller\OrderStatusController@destroy')->name('destroy');
+		});		
+		Route::name('vouchers.')->group(function () {
+			Route::get('seller/vouchers', 'Seller\VouchersController@index')->name('index');
+			Route::get('seller/vouchers/create', 'Seller\VouchersController@create')->name('create');
+			Route::post('seller/vouchers/store', 'Seller\VouchersController@store')->name('store');
+			Route::get('seller/vouchers/show/{id}', 'Seller\VouchersController@show')->name('show');
+			Route::post('seller/vouchers/destroy/{id}', 'Seller\VouchersController@destroy')->name('destroy');
+			Route::get('seller/vouchers/getJson/{id}', 'Seller\VouchersController@getJson')->name('getJson');
+	
+		});
 	});
 });
 

@@ -13,14 +13,14 @@
         </li>
         <li class="header">SALES</li>      
         <li class="">
-          <a href="{{-- route('seller.order.index') --}}">
+          <a href="{{ route('seller.order.index') }}">
             <i class="fa fa-shopping-cart"></i>
             <span>Sales Order</span>            
           </a>         
         </li>
         <li class="header">MASTER DATA</li>      
         <li class="">
-          <a href="{{-- route('seller.categories.index') --}}">
+          <a href="{{ route('seller.categories.index') }}">
             <i class="fa fa-tags"></i>
             <span>Categories</span>
           </a>
@@ -34,7 +34,7 @@
         </li>    
 
         <li class="">
-          <a href="{{-- route('seller.vouchers.index') --}}">
+          <a href="{{ route('seller.vouchers.index') }}">
             <i class="fa fa-gg-circle"></i>
             <span>Upgrade Voucher</span>
           </a>
@@ -42,7 +42,7 @@
 
         <li class="header">SYSTEM CONFIGURATON</li> 
         <li class="">
-          <a href="{{-- route('seller.order_status.index') --}}">
+          <a href="{{ route('seller.order_status.index') }}">
             <i class="fa fa-list-alt"></i>
             <span>Order Status</span>      
           </a>

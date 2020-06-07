@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use tidy;
 
 class ProductModel extends Model
 {
@@ -115,7 +116,12 @@ class ProductModel extends Model
 	        }
 
         }
-    }
+	 }
+	 
+	 public function ProductOrder()
+	 {
+			return $this->belongsTo(OrderDetailModel::class);
+	 }
 
 
 }

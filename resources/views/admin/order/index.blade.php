@@ -49,17 +49,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php $no = 0; foreach ($order as $key => $value) { $no++; ?>
-                  <tr>
-                    <td><?= $no ?></td>
-                    <td><u><b><a href="">RT00-{{ $value->id }}</a></b></u></td>
-                    <td>{{ $value->user_id }}</td>
-                    <td>{{ $value->status }}</td>
-                    <td>{{ $value->total_price }}</td>                    
-                    <td>                                                                          
-                      <a data-toggle="modal" data-target="#modal-danger-{{ $value->id }}" href="javascript::"><i class="fa  fa-edit"></i></a>
-                    </td>
-                  </tr>
+                  <?php $no = 0; foreach ($order as $key => $value) { $no++; ?>
+                    @if (!empty($value->Product))
+                    <tr>
+                      <td><?= $no ?></td>
+                      <td><u><b><a href="">RT00-{{ $value->id }}</a></b></u></td>
+                      <td>{{ $value->Product }}</td>
+                      <td>{{ $value->status }}</td>
+                      <td>{{ $value->total_price }}</td>                    
+                      <td>                                                                          
+                        <a data-toggle="modal" data-target="#modal-danger-{{ $value->id }}" href="javascript::"><i class="fa  fa-edit"></i></a>
+                      </td>
+                    </tr>
+                    @endif
 
                   <div class="modal modal-danger fade" id="modal-danger-<?php echo $value->id ?>">
                     <div class="modal-dialog">
