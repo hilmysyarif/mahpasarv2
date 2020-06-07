@@ -38,9 +38,9 @@
             if (empty(auth()->user()->id)) {
                 $cart = 0;
             }else{
-                $cart = App\Model\CartModel::select('cart.*', 'cart_detail.id_product')->join('cart_detail', 'cart.id', '=', 'cart_detail.id_cart')->where('user_id', '=', auth()->user()->id)->count();                  
-                $cart_data = App\Model\CartModel::select('cart.*', 'cart_detail.id_product', 'cart_detail.qty as qty', 'product.sku as sku', 'product.name as product_name', 'product.image as image', 'product.price as product_price')->join('cart_detail', 'cart.id', '=', 'cart_detail.id_cart')->join('product', 'cart_detail.id_product', '=', 'product.id')->where('user_id', '=', auth()->user()->id)->get();
-                $total = App\Model\CartModel::where('user_id', '=', auth()->user()->id)->first();
+                $cart = App\Model\CartModel::select('cart.*', 'cart_detail.id_product')->join('cart_detail', 'cart.id', '=', 'cart_detail.id_cart')->where('cart.user_id', '=', auth()->user()->id)->count();                  
+                $cart_data = App\Model\CartModel::select('cart.*', 'cart_detail.id_product', 'cart_detail.qty as qty', 'product.sku as sku', 'product.name as product_name', 'product.image as image', 'product.price as product_price')->join('cart_detail', 'cart.id', '=', 'cart_detail.id_cart')->join('product', 'cart_detail.id_product', '=', 'product.id')->where('cart.user_id', '=', auth()->user()->id)->get();
+                $total = App\Model\CartModel::where('cart.user_id', '=', auth()->user()->id)->first();
             }
         ?>      
         Keranjang ({{ $cart }})

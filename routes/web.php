@@ -67,7 +67,7 @@ Route::post('/check_pin_trx', 'Controller@check_pin_trx')->name('check_pin_trx')
 
 // Route::get('/admin', 'HomeController@index')->middleware([CheckRole::class, 'asd'])->name('admin');
 Route::group(['middleware' => ['auth', 'CheckRole:seller']],function(){
-	Route::get('/seller','HomeController@index')->name('seller.dashboard');
+	Route::get('/seller','HomeController@index')->name('seller');
 
 	Route::name('seller.')->group(function () {
 		Route::name('categories.')->group(function () {
