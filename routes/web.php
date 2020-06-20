@@ -65,8 +65,7 @@ Route::post('/check_pin_trx', 'Controller@check_pin_trx')->name('check_pin_trx')
 
 
 
-// Route::get('/admin', 'HomeController@index')->middleware([CheckRole::class, 'asd'])->name('admin');
-Route::group(['middleware' => ['auth', 'CheckRole:seller']],function(){
+Route::group(['middleware' => ['auth', 'CheckRole']],function(){
 	Route::get('/seller','HomeController@index')->name('seller');
 
 	Route::name('seller.')->group(function () {
@@ -116,9 +115,69 @@ Route::group(['middleware' => ['auth', 'CheckRole:seller']],function(){
 	
 		});
 	});
+
+
 });
 
+Route::group(['middleware' => ['auth', 'CheckRole']],function(){
+	Route::get('/admin', 'HomeController@index')->name('admin');
 
+
+	Route::name('admin.')->group(function () {
+		Route::name('categories.')->group(function () {
+			Route::get('admin/categories', 'Admin\CategoriesController@index')->name('index');
+			Route::get('admin/categories/create', 'Admin\CategoriesController@create')->name('create');
+			Route::post('admin/categories/store', 'Admin\CategoriesController@store')->name('store');
+			Route::get('admin/categories/show/{id}', 'Admin\CategoriesController@show')->name('show');
+			Route::get('admin/categories/edit/{id}', 'Admin\CategoriesController@edit')->name('edit');
+			Route::post('admin/categories/update/{id}', 'Admin\CategoriesController@update')->name('update');
+			Route::post('admin/categories/destroy/{id}', 'Admin\CategoriesController@destroy')->name('destroy');
+		});
+
+		Route::name('product.')->group(function () {
+			Route::get('admin/product', 'Admin\ProductController@index')->name('index');
+			Route::get('admin/product/create', 'Admin\ProductController@create')->name('create');
+			Route::post('admin/product/store', 'Admin\ProductController@store')->name('store');
+			Route::get('admin/product/show/{id}', 'Admin\ProductController@show')->name('show');
+			Route::get('admin/product/edit/{id}', 'Admin\ProductController@edit')->name('edit');
+			Route::post('admin/product/update/{id}', 'Admin\ProductController@update')->name('update');
+			Route::post('admin/product/destroy/{id}', 'Admin\ProductController@destroy')->name('destroy');
+		});
+
+		Route::name('order.')->group(function () {
+			Route::get('admin/order/index', 'Admin\OrderController@index')->name('index');
+			Route::get('admin/order/create', 'Admin\OrderController@create')->name('create');
+			Route::post('admin/order/store', 'Admin\OrderController@store')->name('store');
+			Route::get('admin/order/show/{id}', 'Admin\OrderController@show')->name('show');
+			Route::get('admin/order/edit/{id}', 'Admin\OrderController@edit')->name('edit');
+			Route::post('admin/order/update/{id}', 'Admin\OrderController@update')->name('update');
+			Route::post('admin/order/destroy/{id}', 'Admin\OrderController@destroy')->name('destroy');
+		});	
+
+		Route::name('order_status.')->group(function () {
+			Route::get('admin/order_status/index', 'Admin\OrderStatusController@index')->name('index');
+			Route::get('admin/order_status/create', 'Admin\OrderStatusController@create')->name('create');
+			Route::post('admin/order_status/store', 'Admin\OrderStatusController@store')->name('store');
+			Route::get('admin/order_status/show/{id}', 'Admin\OrderStatusController@show')->name('show');
+			Route::get('admin/order_status/edit/{id}', 'Admin\OrderStatusController@edit')->name('edit');
+			Route::post('admin/order_status/update/{id}', 'Admin\OrderStatusController@update')->name('update');
+			Route::post('admin/order_status/destroy/{id}', 'Admin\OrderStatusController@destroy')->name('destroy');
+		});		
+
+		Route::name('vouchers.')->group(function () {
+			Route::get('admin/vouchers', 'Admin\VouchersController@index')->name('index');
+			Route::get('admin/vouchers/create', 'Admin\VouchersController@create')->name('create');
+			Route::post('admin/vouchers/store', 'Admin\VouchersController@store')->name('store');
+			Route::get('admin/vouchers/show/{id}', 'Admin\VouchersController@show')->name('show');
+			Route::post('admin/vouchers/destroy/{id}', 'Admin\VouchersController@destroy')->name('destroy');
+			Route::get('admin/vouchers/getJson/{id}', 'Admin\VouchersController@getJson')->name('getJson');
+
+		});
+
+	});
+
+
+});
 Route::name('fe.')->group(function () {
 	Route::get('fe/index', 'FrontendController@index')->name('index');
 
@@ -143,55 +202,3 @@ Route::name('fe.')->group(function () {
 	});		
 });
 
-Route::name('admin.')->group(function () {
-	Route::name('categories.')->group(function () {
-		Route::get('admin/categories', 'Admin\CategoriesController@index')->name('index');
-		Route::get('admin/categories/create', 'Admin\CategoriesController@create')->name('create');
-		Route::post('admin/categories/store', 'Admin\CategoriesController@store')->name('store');
-		Route::get('admin/categories/show/{id}', 'Admin\CategoriesController@show')->name('show');
-		Route::get('admin/categories/edit/{id}', 'Admin\CategoriesController@edit')->name('edit');
-		Route::post('admin/categories/update/{id}', 'Admin\CategoriesController@update')->name('update');
-		Route::post('admin/categories/destroy/{id}', 'Admin\CategoriesController@destroy')->name('destroy');
-	});
-
-	Route::name('product.')->group(function () {
-		Route::get('admin/product', 'Admin\ProductController@index')->name('index');
-		Route::get('admin/product/create', 'Admin\ProductController@create')->name('create');
-		Route::post('admin/product/store', 'Admin\ProductController@store')->name('store');
-		Route::get('admin/product/show/{id}', 'Admin\ProductController@show')->name('show');
-		Route::get('admin/product/edit/{id}', 'Admin\ProductController@edit')->name('edit');
-		Route::post('admin/product/update/{id}', 'Admin\ProductController@update')->name('update');
-		Route::post('admin/product/destroy/{id}', 'Admin\ProductController@destroy')->name('destroy');
-	});
-
-	Route::name('order.')->group(function () {
-		Route::get('admin/order/index', 'Admin\OrderController@index')->name('index');
-		Route::get('admin/order/create', 'Admin\OrderController@create')->name('create');
-		Route::post('admin/order/store', 'Admin\OrderController@store')->name('store');
-		Route::get('admin/order/show/{id}', 'Admin\OrderController@show')->name('show');
-		Route::get('admin/order/edit/{id}', 'Admin\OrderController@edit')->name('edit');
-		Route::post('admin/order/update/{id}', 'Admin\OrderController@update')->name('update');
-		Route::post('admin/order/destroy/{id}', 'Admin\OrderController@destroy')->name('destroy');
-	});	
-
-	Route::name('order_status.')->group(function () {
-		Route::get('admin/order_status/index', 'Admin\OrderStatusController@index')->name('index');
-		Route::get('admin/order_status/create', 'Admin\OrderStatusController@create')->name('create');
-		Route::post('admin/order_status/store', 'Admin\OrderStatusController@store')->name('store');
-		Route::get('admin/order_status/show/{id}', 'Admin\OrderStatusController@show')->name('show');
-		Route::get('admin/order_status/edit/{id}', 'Admin\OrderStatusController@edit')->name('edit');
-		Route::post('admin/order_status/update/{id}', 'Admin\OrderStatusController@update')->name('update');
-		Route::post('admin/order_status/destroy/{id}', 'Admin\OrderStatusController@destroy')->name('destroy');
-	});		
-
-	Route::name('vouchers.')->group(function () {
-		Route::get('admin/vouchers', 'Admin\VouchersController@index')->name('index');
-		Route::get('admin/vouchers/create', 'Admin\VouchersController@create')->name('create');
-		Route::post('admin/vouchers/store', 'Admin\VouchersController@store')->name('store');
-		Route::get('admin/vouchers/show/{id}', 'Admin\VouchersController@show')->name('show');
-		Route::post('admin/vouchers/destroy/{id}', 'Admin\VouchersController@destroy')->name('destroy');
-		Route::get('admin/vouchers/getJson/{id}', 'Admin\VouchersController@getJson')->name('getJson');
-
-	});
-
-});

@@ -13,9 +13,9 @@ class CheckRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next)
     {
-        if (auth()->user()->role == 2) {
+        if ( !$request->user()->hasRole('seller') && !$request->user()->hasRole('admin')) {
             return redirect(route('home'));
         }
         return $next($request);
